@@ -1,0 +1,115 @@
+# ============================================
+# GITHUB ACTIONS - CI/CD PIPELINE
+# Cricket Analytics DevOps Project
+# ============================================
+# This runs automatically every time you
+# push code to GitHub
+
+name: Cricket Analytics Pipeline
+
+# ---- WHEN TO RUN ----
+on:
+  push:
+    branches: [ main ]        # Run on every push to main
+  pull_request:
+    branches: [ main ]        # Run on every pull request
+  schedule:
+    - cron: '0 0 * * 1'      # Run every Monday at midnight
+  workflow_dispatch:           # Allow manual trigger from GitHub
+
+# ---- WHAT TO RUN ----
+jobs:
+
+  # ----------------------------------------
+  # JOB 1: Test Python code
+  # ----------------------------------------
+  test:
+    name: 🧪 Test Code
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Step 4: Check all Python files for syntax errors
+      - name: Check syntax
+        run: |
+          python -m py_compile config.py
+          python -m py_compile ingestion/data_loader.py
+          python -m py_compile ingestion/filter_selector.py
+          python -m py_compile analytics/batting/batting_scorer.py
+          python -m py_compile analytics/bowling/bowling_scorer.py
+          python -m py_compile analytics/fielding/fielding_scorer.py
+          python -m py_compile analytics/allrounder/allrounder_scorer.py
+          echo "✅ All files passed syntax check!"
+
+      # Step 5: Check imports work correctly
+      - name: Check imports
+        run: |
+          python -c "import pandas; print('✅ pandas OK')"
+          python -c "import numpy; print('✅ numpy OK')"
+          python -c "import streamlit; print('✅ streamlit OK')"
+          python -c "import plotly; print('✅ plotly OK')"
+
+  # ----------------------------------------
+  # JOB 2: Build Docker image
+  # ----------------------------------------
+  build:
+    name: 🐳 Build Docker Image
+    runs-on: ubuntu-latest
+    needs: test              # Only runs if test job passes
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t cricket-analytics:latest .
+
+      - name: Verify image was created
+        run: |
+          docker images cricket-analytics
+          echo "✅ Docker image built successfully!"
+
+  # ----------------------------------------
+  # JOB 3: Validate project structure
+  # ----------------------------------------
+  validate:
+    name: ✅ Validate Structure
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check all required files exist
+        run: |
+          echo "Checking project structure..."
+
+          # Check key files exist
+          test -f config.py              && echo "✅ config.py" || exit 1
+          test -f requirements.txt       && echo "✅ requirements.txt" || exit 1
+          test -f Dockerfile             && echo "✅ Dockerfile" || exit 1
+          test -f ingestion/data_loader.py      && echo "✅ data_loader.py" || exit 1
+          test -f ingestion/filter_selector.py  && echo "✅ filter_selector.py" || exit 1
+          test -f analytics/batting/batting_scorer.py   && echo "✅ batting_scorer.py" || exit 1
+          test -f analytics/bowling/bowling_scorer.py   && echo "✅ bowling_scorer.py" || exit 1
+          test -f analytics/fielding/fielding_scorer.py && echo "✅ fielding_scorer.py" || exit 1
+          test -f analytics/allrounder/allrounder_scorer.py && echo "✅ allrounder_scorer.py" || exit 1
+
+          echo "✅ All required files present!"
