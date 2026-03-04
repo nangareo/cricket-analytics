@@ -19,19 +19,14 @@ ALL_SEASONS = [
 # ---- RETIRED PLAYERS ----
 # MS Dhoni removed - still plays!
 RETIRED_PLAYERS = [
-    # Batsmen
     "SR Tendulkar", "SC Ganguly", "RT Ponting",
     "KC Sangakkara", "CH Gayle", "SR Watson",
     "G Gambhir", "V Sehwag", "BB McCullum",
     "MEK Hussey", "DR Smith", "AC Gilchrist",
-    "DR Martyn", "ML Hayden",
-    # Bowlers
     "SL Malinga", "Z Khan", "RP Singh",
-    "P Kumar", "PP Ojha", "AB Dinda",
     "DW Steyn", "SW Tait", "B Lee",
     "DE Bollinger", "DP Nannes",
     "Harbhajan Singh", "A Mishra",
-    # All-rounders
     "IK Pathan", "YK Pathan", "AS Raina",
     "DJ Bravo", "DA Warner",
 ]
