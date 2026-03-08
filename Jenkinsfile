@@ -7,6 +7,7 @@ pipeline {
         PORT           = "8501"
         ECR_URI        = "526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest"
         AWS_REGION     = "ap-south-1"
+        ECR_REGISTRY   = "526002960065.dkr.ecr.ap-south-1.amazonaws.com"
     }
 
     stages {
@@ -20,9 +21,20 @@ pipeline {
         stage('Pull from ECR') {
             steps {
                 echo '📦 Pulling Docker image from ECR...'
-                sh 'aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin 526002960065.dkr.ecr.ap-south-1.amazonaws.com'
-                sh 'docker pull ${ECR_URI}'
-                sh 'docker tag ${ECR_URI} ${IMAGE_NAME}:latest'
+                withCredentials([
+                    string(credentialsId: 'AWS_ACCESS_KEY_ID',     variable: 'AWS_KEY'),
+                    string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET')
+                ]) {
+                    sh '''
+                        export AWS_ACCESS_KEY_ID=$AWS_KEY
+                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET
+                        export AWS_DEFAULT_REGION=ap-south-1
+                        aws ecr get-login-password --region ap-south-1 | \
+                        docker login --username AWS --password-stdin 526002960065.dkr.ecr.ap-south-1.amazonaws.com
+                        docker pull 526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest
+                        docker tag  526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest cricket-analytics:latest
+                    '''
+                }
             }
         }
 
@@ -30,7 +42,7 @@ pipeline {
             steps {
                 echo '🛑 Stopping old container...'
                 sh 'docker stop ${CONTAINER_NAME} || true'
-                sh 'docker rm ${CONTAINER_NAME} || true'
+                sh 'docker rm   ${CONTAINER_NAME} || true'
             }
         }
 
@@ -39,11 +51,11 @@ pipeline {
                 echo '🚀 Starting new container...'
                 sh '''
                     docker run -d \
-                        --name ${CONTAINER_NAME} \
+                        --name cricket-dashboard \
                         --restart always \
-                        -p ${PORT}:8501 \
+                        -p 8501:8501 \
                         -v /home/ubuntu/cricket-data:/app/data \
-                        ${IMAGE_NAME}:latest \
+                        cricket-analytics:latest \
                         streamlit run dashboard/app.py \
                         --server.port=8501 \
                         --server.address=0.0.0.0
@@ -54,7 +66,7 @@ pipeline {
         stage('Verify') {
             steps {
                 echo '✅ Verifying container is running...'
-                sh 'docker ps | grep ${CONTAINER_NAME}'
+                sh 'docker ps | grep cricket-dashboard'
             }
         }
     }
