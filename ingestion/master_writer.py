@@ -192,14 +192,8 @@ main_dash = open(os.path.join(os.path.dirname(__file__),
 team_tab  = open(os.path.join(os.path.dirname(__file__),
                               "team_tab_code.py"), encoding="utf-8").read()
 
-# Combine: replace tab line and add tab8, imports, team tab
+# Combine: add imports, team tab
 full_app = main_dash.replace(
-    "tab1,tab2,tab3,tab4,tab5,tab6,tab7 = st.tabs([",
-    "tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs(["
-).replace(
-    '"🔍  PLAYER SEARCH"',
-    '"🔍  PLAYER SEARCH","🏟️  TEAM INTEL"'
-).replace(
     "from dashboard.ipl_teams import get_team_color, get_team_info, PLAYER_TEAMS, IPL_TEAMS, avatar_html",
     "from dashboard.ipl_teams import get_team_color, get_team_info, PLAYER_TEAMS, IPL_TEAMS, avatar_html, RETIRED_PLAYERS\n"
     "from analytics.team_analytics import (get_team_players, calculate_team_stats,\n"

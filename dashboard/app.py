@@ -26,96 +26,140 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-    --bg:       #050a0e;
-    --surface:  #0d1117;
-    --card:     #111820;
-    --border:   #1e2d3d;
-    --accent:   #00d4aa;
-    --gold:     #f0b429;
-    --red:      #e63946;
-    --text:     #e6edf3;
-    --muted:    #7d8590;
-    --glow:     0 0 20px rgba(0,212,170,0.3);
+    /* Dark side */
+    --dark:      #0d1117;
+    --dark2:     #161b22;
+    --dark3:     #21262d;
+    /* Light accents */
+    --light:     #f0f6ff;
+    --light2:    #e8f4f8;
+    /* Brand colors */
+    --accent:    #1db954;
+    --accent2:   #17a844;
+    --gold:      #ffd700;
+    --gold2:     #ffaa00;
+    --red:       #ff4444;
+    --blue:      #4fc3f7;
+    /* Text */
+    --text:      #f0f6ff;
+    --text-dark: #0d1117;
+    --muted:     #8b949e;
+    /* Effects */
+    --glow-green: 0 0 30px rgba(29,185,84,0.4);
+    --glow-gold:  0 0 30px rgba(255,215,0,0.3);
+    --card-bg:    rgba(22,27,34,0.9);
+    --card-light: rgba(240,246,255,0.95);
 }
 
 html, body, [data-testid="stAppViewContainer"] {
-    background: var(--bg) !important;
+    background: #0d1117 !important;
     color: var(--text) !important;
     font-family: 'Inter', sans-serif;
 }
 
-[data-testid="stSidebar"] {
-    background: var(--surface) !important;
-    border-right: 1px solid var(--border);
-}
-
-[data-testid="stSidebar"] * { color: var(--text) !important; }
-
-/* Hide default streamlit elements */
+[data-testid="stSidebar"] { display: none !important; }
 #MainMenu, footer, header { visibility: hidden; }
 [data-testid="stDecoration"] { display: none; }
 
-/* HERO HEADER */
+/* ── HERO ── */
 .hero {
-    background: linear-gradient(135deg, #050a0e 0%, #0a1628 50%, #050a0e 100%);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2.5rem 2rem;
+    background: linear-gradient(160deg, #0d1117 0%, #1a2332 40%, #0d2137 100%);
+    border: 1px solid rgba(29,185,84,0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem 2.5rem;
     margin-bottom: 1.5rem;
     position: relative;
     overflow: hidden;
     text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 .hero::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at center,
-        rgba(0,212,170,0.06) 0%, transparent 70%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(ellipse 60% 50% at 20% 50%, rgba(29,185,84,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255,215,0,0.06) 0%, transparent 60%);
     pointer-events: none;
+}
+.hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
 }
 .hero-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 3.2rem;
+    font-size: 4rem;
     font-weight: 700;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #00d4aa, #f0b429, #00d4aa);
+    color: #ffffff;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(29,185,84,0.3);
+}
+.hero-title span {
+    background: linear-gradient(135deg, #1db954 0%, #ffd700 50%, #1db954 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shine 3s linear infinite;
-    margin: 0;
-    line-height: 1.1;
+    animation: gradientShift 4s linear infinite;
 }
 .hero-sub {
     color: var(--muted);
-    font-size: 0.9rem;
-    letter-spacing: 4px;
+    font-size: 0.85rem;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
 }
 .hero-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #f0b429, #e07b00);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
     color: #000;
     font-family: 'Rajdhani', sans-serif;
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     letter-spacing: 2px;
-    padding: 3px 12px;
-    border-radius: 20px;
-    margin-top: 0.8rem;
+    padding: 5px 16px;
+    border-radius: 30px;
+    margin-top: 1rem;
     text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(255,215,0,0.4);
 }
-@keyframes shine {
-    to { background-position: 200% center; }
+.hero-stats-strip {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+.hero-stat-item { text-align: center; }
+.hero-stat-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+.hero-stat-lbl {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}
+@keyframes gradientShift {
+    0%   { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
-/* STAT CARDS */
+/* ── LIGHT CARDS (stat summary) ── */
 .stat-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -123,48 +167,52 @@ html, body, [data-testid="stAppViewContainer"] {
     margin: 1rem 0;
 }
 .stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    background: linear-gradient(145deg, #f8faff, #eef4ff);
+    border: none;
+    border-radius: 16px;
     padding: 1.2rem 1rem;
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15), 0 1px 0 rgba(255,255,255,0.8) inset;
+    color: #0d1117;
 }
 .stat-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(29,185,84,0.25), 0 1px 0 rgba(255,255,255,0.8) inset;
 }
 .stat-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
+    height: 3px;
+    background: linear-gradient(90deg, #1db954, #ffd700, #1db954);
+    background-size: 200% auto;
+    animation: gradientShift 3s linear infinite;
 }
 .stat-value {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
-    color: var(--accent);
+    color: #1db954;
     line-height: 1;
 }
 .stat-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #64748b;
     margin-top: 0.3rem;
 }
 .stat-name {
-    font-size: 0.85rem;
-    color: var(--text);
-    margin-top: 0.2rem;
-    font-weight: 500;
+    font-size: 0.82rem;
+    color: #1e293b;
+    margin-top: 0.3rem;
+    font-weight: 600;
 }
 
-/* PLAYER CARDS */
+/* ── DARK PLAYER CARDS ── */
 .player-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -172,23 +220,25 @@ html, body, [data-testid="stAppViewContainer"] {
     margin: 1rem 0;
 }
 .player-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
     padding: 1.2rem;
     position: relative;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 .player-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--glow);
+    transform: translateY(-4px);
+    border-color: rgba(29,185,84,0.4);
+    box-shadow: var(--glow-green), 0 8px 30px rgba(0,0,0,0.4);
 }
 .player-rank {
     font-family: 'Rajdhani', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--border);
+    color: rgba(255,255,255,0.06);
     position: absolute;
     top: 0.5rem;
     right: 0.8rem;
@@ -213,11 +263,7 @@ html, body, [data-testid="stAppViewContainer"] {
     font-weight: 700;
     line-height: 1;
 }
-.player-stats {
-    display: flex;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
-}
+.player-stats { display: flex; gap: 0.8rem; margin-top: 0.5rem; }
 .mini-stat { font-size: 0.72rem; color: var(--muted); }
 .mini-val  { font-weight: 600; color: var(--text); }
 
@@ -232,82 +278,94 @@ html, body, [data-testid="stAppViewContainer"] {
     text-transform: uppercase;
 }
 
-/* LEADERBOARD */
+/* ── LEADERBOARD — alternating light/dark ── */
 .lb-row {
     display: grid;
     grid-template-columns: 40px 1fr 80px 80px 80px 90px;
     align-items: center;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
     margin-bottom: 0.4rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    transition: background 0.15s;
+    background: rgba(22,27,34,0.8);
+    border: 1px solid rgba(255,255,255,0.05);
+    transition: all 0.2s;
 }
-.lb-row:hover { background: #161f2a; }
-.lb-row.gold   { border-left: 3px solid #f0b429; }
-.lb-row.silver { border-left: 3px solid #8b9eb7; }
+.lb-row:hover {
+    background: rgba(29,185,84,0.08);
+    border-color: rgba(29,185,84,0.25);
+    transform: translateX(4px);
+    box-shadow: -3px 0 0 #1db954;
+}
+.lb-row.gold   { border-left: 3px solid #ffd700; background: rgba(255,215,0,0.04); }
+.lb-row.silver { border-left: 3px solid #94a3b8; }
 .lb-row.bronze { border-left: 3px solid #cd7f32; }
-.lb-rank { font-family:'Rajdhani',sans-serif; font-size:1.3rem;
-           font-weight:700; color:var(--muted); }
-.lb-rank.r1 { color:#f0b429; }
-.lb-rank.r2 { color:#8b9eb7; }
+.lb-rank { font-family:'Rajdhani',sans-serif; font-size:1.3rem; font-weight:700; color:var(--muted); }
+.lb-rank.r1 { color:#ffd700; }
+.lb-rank.r2 { color:#94a3b8; }
 .lb-rank.r3 { color:#cd7f32; }
-.lb-name  { font-weight:600; font-size:0.95rem; }
-.lb-team  { font-size:0.7rem; color:var(--muted); }
-.lb-stat  { text-align:right; font-size:0.85rem; color:var(--muted); }
+.lb-name  { font-weight:600; font-size:0.92rem; color:var(--text); }
+.lb-team  { font-size:0.68rem; color:var(--muted); }
+.lb-stat  { text-align:right; font-size:0.82rem; color:var(--muted); }
 .lb-score { text-align:right; font-family:'Rajdhani',sans-serif;
-            font-size:1.3rem; font-weight:700; color:var(--accent); }
+            font-size:1.3rem; font-weight:700; color:#1db954; }
 
-/* SECTION TITLES */
+/* ── SECTION TITLES ── */
 .section-title {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text);
-    border-left: 3px solid var(--accent);
-    padding-left: 0.8rem;
-    margin: 1.5rem 0 1rem 0;
-}
-
-/* TABS */
-[data-testid="stTabs"] button {
-    font-family: 'Rajdhani', sans-serif !important;
-    font-size: 0.9rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase !important;
-    color: var(--muted) !important;
-}
-[data-testid="stTabs"] button[aria-selected="true"] {
-    color: var(--accent) !important;
-    border-bottom-color: var(--accent) !important;
-}
-
-/* SIDEBAR */
-.sidebar-logo {
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--accent);
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1.8rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(29,185,84,0.3);
+}
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1.4rem;
+    background: linear-gradient(180deg, #1db954, #ffd700);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* ── TABS ── */
+[data-testid="stTabs"] {
+    background: rgba(13,17,23,0.8);
+    border-radius: 12px;
+    padding: 4px;
+}
+[data-testid="stTabs"] button {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    color: var(--muted) !important;
+    border-radius: 8px !important;
+    padding: 6px 12px !important;
+}
+[data-testid="stTabs"] button[aria-selected="true"] {
+    color: #ffffff !important;
+    background: rgba(29,185,84,0.15) !important;
+    border-bottom-color: #1db954 !important;
 }
 
 /* H2H cards */
 .h2h-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
     border-radius: 16px;
     padding: 1.5rem;
     text-align: center;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
 }
 .h2h-score {
     font-family: 'Rajdhani', sans-serif;
@@ -332,17 +390,21 @@ html, body, [data-testid="stAppViewContainer"] {
 
 /* BEST XI */
 .xi-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
     border-radius: 10px;
     padding: 0.8rem 1rem;
     display: flex;
     align-items: center;
     gap: 1rem;
     margin-bottom: 0.5rem;
-    transition: transform 0.15s;
+    transition: all 0.2s;
 }
-.xi-card:hover { transform: translateX(4px); }
+.xi-card:hover {
+    transform: translateX(5px);
+    border-color: rgba(29,185,84,0.3);
+    box-shadow: -3px 0 0 #1db954;
+}
 .xi-role {
     font-size: 0.65rem;
     letter-spacing: 1px;
@@ -356,12 +418,13 @@ html, body, [data-testid="stAppViewContainer"] {
     font-size: 1.1rem;
     font-weight: 600;
     flex: 1;
+    color: var(--text);
 }
 .xi-score {
     font-family: 'Rajdhani', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--accent);
+    color: #1db954;
 }
 
 /* Progress bars */
@@ -370,22 +433,27 @@ html, body, [data-testid="stAppViewContainer"] {
     display:flex; justify-content:space-between;
     font-size:0.72rem; color:var(--muted); margin-bottom:3px;
 }
-.progress-bar {
-    height: 4px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-}
+.progress-bar { height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
 .progress-fill {
     height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 3px;
+    background: linear-gradient(90deg, #1db954, #ffd700);
+}
+
+/* Filter bar */
+[data-testid="stSelectbox"] > div, [data-testid="stNumberInput"] > div {
+    background: rgba(22,27,34,0.9) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    color: var(--text) !important;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: #1db954; border-radius: 2px; }
+
+/* Sidebar hidden */
+.sidebar-logo { display: none; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -480,9 +548,32 @@ def rank_cls(i):
 # ── HERO ─────────────────────────────────────────────
 st.markdown("""
 <div class="hero">
-    <div class="hero-title">🏏 Cricket Analytics</div>
-    <div class="hero-sub">IPL Intelligence Platform</div>
-    <div class="hero-badge">🏆 IPL 2025 — RCB Champions</div>
+    <div style="text-align:center;margin-bottom:1rem;">
+        <svg width="110" height="110" viewBox="0 0 447.983 447.983" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0 -1020.36)">
+                <circle cx="223.947" cy="1244.292" r="210.113" fill="#1db954" opacity="0.12"/>
+                <circle cx="223.947" cy="1244.292" r="187.992" fill="#0a1628" stroke="#1db954" stroke-width="3" opacity="0.9"/>
+                <circle cx="223.947" cy="1244.292" r="143.976" fill="none" stroke="#4fc3f7" stroke-width="3" opacity="0.5"/>
+                <circle cx="223.947" cy="1244.292" r="130.855" fill="none" stroke="#4fc3f7" stroke-width="1.5" opacity="0.25"/>
+                <rect x="191.939" y="1180.276" width="64.016" height="128.031" rx="3" fill="#c8a96e" opacity="0.9"/>
+                <rect x="208.003" y="1196.339" width="32.007" height="96.023" rx="2" fill="rgba(255,255,255,0.85)"/>
+                <rect x="175.995" y="1204.253" width="96.024" height="8" rx="2" fill="#ffd700"/>
+                <rect x="175.995" y="1276.269" width="96.024" height="8" rx="2" fill="#ffd700"/>
+                <path d="M250.986,1021.998c-51.666-6.268-105.523,5.381-151.531,36.157c-3.676,2.459-4.663,7.434-2.203,11.109s7.433,4.662,11.109,2.203c85.537-57.216,199.905-43.352,269.281,32.658c69.376,76.008,72.768,191.152,8,271.125c-64.768,79.971-178.109,100.598-266.875,48.531s-126.1-161.066-87.906-256.625c1.814-4.029,0.017-8.766-4.012-10.58c-4.029-1.813-8.766-0.018-10.58,4.012c-0.093,0.207-0.177,0.418-0.252,0.631c-41.087,102.799-0.834,220.332,94.656,276.344s217.732,33.811,287.406-52.219c69.674-86.031,66.007-210.232-8.625-292c-37.316-40.883-86.803-65.077-138.469-71.344V1021.998z" fill="#1db954" opacity="0.9"/>
+                <path d="M242.392,1085.343c-58.03-6.693-117.219,18.84-151.438,70c-45.625,68.215-32.155,160.059,31.125,212.314c63.28,52.252,156.022,48.111,214.375-9.594c3.187-3.061,3.288-8.125,0.227-11.313c-3.061-3.188-8.126-3.289-11.313-0.227c-0.056,0.053-0.111,0.107-0.165,0.162c-52.61,52.025-135.885,55.768-192.938,8.656s-69.135-129.592-28-191.094s121.955-81.836,187.281-47.094c65.326,34.74,93.683,113.137,65.688,181.625c-1.674,4.09,0.285,8.764,4.375,10.438s8.763-0.285,10.438-4.375c31.051-75.965-0.512-163.279-72.969-201.813C280.965,1093.397,261.735,1087.575,242.392,1085.343z" fill="#ffd700" opacity="0.8"/>
+                <path d="M73.173,1081.624c-2.078,0.033-4.062,0.873-5.531,2.344c-13.77,13.426-25.755,28.574-35.656,45.063c-2.278,3.789-1.054,8.707,2.734,10.984s8.706,1.055,10.984-2.734c9.194-15.309,20.307-29.377,33.094-41.844c3.21-3.037,3.351-8.1,0.315-11.311C77.572,1082.497,75.417,1081.589,73.173,1081.624z" fill="#1db954" opacity="0.8"/>
+            </g>
+        </svg>
+    </div>
+    <div class="hero-title">CRICKET <span>ANALYTICS</span></div>
+    <div class="hero-sub">IPL Intelligence Platform &nbsp;·&nbsp; 2008 – 2025</div>
+    <div style="margin-top:0.8rem;"><span class="hero-badge">🏆 IPL 2025 — RCB Champions</span></div>
+    <div class="hero-stats-strip">
+        <div class="hero-stat-item"><div class="hero-stat-num">18</div><div class="hero-stat-lbl">Seasons</div></div>
+        <div class="hero-stat-item"><div class="hero-stat-num">1000+</div><div class="hero-stat-lbl">Players</div></div>
+        <div class="hero-stat-item"><div class="hero-stat-num">10</div><div class="hero-stat-lbl">Teams</div></div>
+        <div class="hero-stat-item"><div class="hero-stat-num">4</div><div class="hero-stat-lbl">Analytics</div></div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -583,9 +674,9 @@ st.markdown("<hr style='border:none;border-top:1px solid #1e2d3d;margin:0.5rem 0
 
 # ── TABS ─────────────────────────────────────────────
 tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs([
-    "🏏  BATTING", "🎯  BOWLING", "🤸  ALL-ROUNDERS",
-    "⚔️  HEAD TO HEAD", "📈  SEASON TRENDS",
-    "🌟  BEST XI", "🔍  PLAYER SEARCH","🏟️  TEAM INTEL"
+    "🏏 BATTING", "🎯 BOWLING", "⚡ ALL-ROUNDERS",
+    "⚔️ HEAD TO HEAD", "📈 SEASON TRENDS",
+    "👑 BEST XI", "🔎 PLAYER SEARCH", "🏟️ TEAM INTEL"
 ])
 
 # ──────────────────────────────────────────────────────
@@ -622,7 +713,7 @@ with tab1:
         """, unsafe_allow_html=True)
 
         # Leaderboard
-        st.markdown('<div class="section-title">Rankings</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title"><svg width="20" height="20" viewBox="0 0 465 465" style="vertical-align:middle;margin-right:8px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 -540.36)"><path fill="#ffffff" d="M396.7,608.16c-43.9-43.7-102.2-67.8-164.2-67.8c-62.5,0-120.9,24.1-164.7,67.8C24.1,651.86,0,710.36,0,772.86c0,62,24.1,120.3,67.8,164.2c43.9,44,102.4,68.3,164.7,68.3c61.9,0,120.2-24.3,164.2-68.3s68.3-102.4,68.3-164.2C465,710.56,440.7,652.06,396.7,608.16z M15,772.86c0-119.9,97.6-217.5,217.5-217.5c35.5,0,69,8.5,98.6,23.7L38.7,871.46C23.6,841.86,15,808.36,15,772.86z M106.8,950.26l19-19l-10.6-10.6l-20.4,20.4c-11.4-9.3-21.8-19.8-31.1-31.1l19.7-19.7l-10.6-10.6l-18.3,18.3c-2.9-4.1-5.7-8.4-8.3-12.8l298.5-298.5c4.4,2.6,8.6,5.4,12.8,8.3l-10.8,10.8l10.6,10.6l12.3-12.3c11.3,9.2,21.6,19.4,30.8,30.6l-11.6,12.3l10.9,10.3l9.9-10.5c2.9,4,5.6,8.1,8.2,12.3l-299.1,299.1C114.6,955.66,110.6,953.06,106.8,950.26z M232.5,990.36c-36.1,0-70.2-8.9-100.2-24.5l293.2-293.2c15.7,30,24.5,64.1,24.5,100.2C450,892.76,352.4,990.36,232.5,990.36z"/><rect fill="#111111" x="287.32" y="734.124" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -28.2602 1491.7417)" width="15" height="35.2"/><rect fill="#111111" x="95.693" y="842.467" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -431.998 1541.1948)" width="15" height="35.2"/><rect fill="#111111" x="132.844" y="804.948" transform="matrix(0.7071 0.7071 -0.7071 0.7071 622.735 141.6802)" width="15" height="35.2"/><rect fill="#111111" x="207.692" y="730.454" transform="matrix(0.7071 0.7071 -0.7071 0.7071 591.9841 66.9372)" width="15" height="35.2"/><rect fill="#111111" x="170.342" y="767.733" transform="matrix(0.7071 0.7071 -0.7071 0.7071 607.4029 104.265)" width="15" height="35.2"/><rect fill="#111111" x="244.844" y="692.963" transform="matrix(0.7071 0.7071 -0.7071 0.7071 576.3555 29.6861)" width="15" height="35.2"/><rect fill="#111111" x="282.335" y="655.712" transform="matrix(0.7071 0.7071 -0.7071 0.7071 560.9943 -7.7354)" width="15" height="35.2"/><rect fill="#111111" x="319.557" y="618.292" transform="matrix(0.7071 0.7071 -0.7071 0.7071 545.4363 -45.0157)" width="15" height="35.2"/><rect fill="#111111" x="137.964" y="883.536" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -388.8769 1641.194)" width="15" height="35.2"/><rect fill="#111111" x="175.328" y="846.13" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -298.643 1603.7579)" width="15" height="35.2"/><rect fill="#111111" x="249.97" y="771.53" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -118.47 1529.1877)" width="15" height="35.2"/><rect fill="#111111" x="212.677" y="808.865" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -208.5332 1566.5532)" width="15" height="35.2"/><rect fill="#111111" x="324.683" y="696.859" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 61.8737 1454.547)" width="15" height="35.2"/><rect fill="#111111" x="361.962" y="659.524" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 151.9128 1417.1716)" width="15" height="35.2"/><circle fill="#111111" cx="357" cy="904.358" r="7.5"/></g></svg>Bowling Rankings</div>', unsafe_allow_html=True)
         st.markdown("""
         <div class="lb-row" style="background:transparent;border-color:transparent;
              color:#7d8590;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;">
@@ -721,7 +812,7 @@ with tab2:
         </div>
         """, unsafe_allow_html=True)
 
-        st.markdown('<div class="section-title">Rankings</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title"><svg width="20" height="20" viewBox="0 0 465 465" style="vertical-align:middle;margin-right:8px;flex-shrink:0" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0 -540.36)"><path fill="#ffffff" d="M396.7,608.16c-43.9-43.7-102.2-67.8-164.2-67.8c-62.5,0-120.9,24.1-164.7,67.8C24.1,651.86,0,710.36,0,772.86c0,62,24.1,120.3,67.8,164.2c43.9,44,102.4,68.3,164.7,68.3c61.9,0,120.2-24.3,164.2-68.3s68.3-102.4,68.3-164.2C465,710.56,440.7,652.06,396.7,608.16z M15,772.86c0-119.9,97.6-217.5,217.5-217.5c35.5,0,69,8.5,98.6,23.7L38.7,871.46C23.6,841.86,15,808.36,15,772.86z M106.8,950.26l19-19l-10.6-10.6l-20.4,20.4c-11.4-9.3-21.8-19.8-31.1-31.1l19.7-19.7l-10.6-10.6l-18.3,18.3c-2.9-4.1-5.7-8.4-8.3-12.8l298.5-298.5c4.4,2.6,8.6,5.4,12.8,8.3l-10.8,10.8l10.6,10.6l12.3-12.3c11.3,9.2,21.6,19.4,30.8,30.6l-11.6,12.3l10.9,10.3l9.9-10.5c2.9,4,5.6,8.1,8.2,12.3l-299.1,299.1C114.6,955.66,110.6,953.06,106.8,950.26z M232.5,990.36c-36.1,0-70.2-8.9-100.2-24.5l293.2-293.2c15.7,30,24.5,64.1,24.5,100.2C450,892.76,352.4,990.36,232.5,990.36z"/><rect fill="#111111" x="287.32" y="734.124" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -28.2602 1491.7417)" width="15" height="35.2"/><rect fill="#111111" x="95.693" y="842.467" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -431.998 1541.1948)" width="15" height="35.2"/><rect fill="#111111" x="132.844" y="804.948" transform="matrix(0.7071 0.7071 -0.7071 0.7071 622.735 141.6802)" width="15" height="35.2"/><rect fill="#111111" x="207.692" y="730.454" transform="matrix(0.7071 0.7071 -0.7071 0.7071 591.9841 66.9372)" width="15" height="35.2"/><rect fill="#111111" x="170.342" y="767.733" transform="matrix(0.7071 0.7071 -0.7071 0.7071 607.4029 104.265)" width="15" height="35.2"/><rect fill="#111111" x="244.844" y="692.963" transform="matrix(0.7071 0.7071 -0.7071 0.7071 576.3555 29.6861)" width="15" height="35.2"/><rect fill="#111111" x="282.335" y="655.712" transform="matrix(0.7071 0.7071 -0.7071 0.7071 560.9943 -7.7354)" width="15" height="35.2"/><rect fill="#111111" x="319.557" y="618.292" transform="matrix(0.7071 0.7071 -0.7071 0.7071 545.4363 -45.0157)" width="15" height="35.2"/><rect fill="#111111" x="137.964" y="883.536" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -388.8769 1641.194)" width="15" height="35.2"/><rect fill="#111111" x="175.328" y="846.13" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -298.643 1603.7579)" width="15" height="35.2"/><rect fill="#111111" x="249.97" y="771.53" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -118.47 1529.1877)" width="15" height="35.2"/><rect fill="#111111" x="212.677" y="808.865" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 -208.5332 1566.5532)" width="15" height="35.2"/><rect fill="#111111" x="324.683" y="696.859" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 61.8737 1454.547)" width="15" height="35.2"/><rect fill="#111111" x="361.962" y="659.524" transform="matrix(-0.7071 -0.7071 0.7071 -0.7071 151.9128 1417.1716)" width="15" height="35.2"/><circle fill="#111111" cx="357" cy="904.358" r="7.5"/></g></svg>Bowling Rankings</div>', unsafe_allow_html=True)
         st.markdown("""
         <div class="lb-row" style="background:transparent;border-color:transparent;
              color:#7d8590;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;">
@@ -806,7 +897,7 @@ with tab3:
 
         col1, col2 = st.columns([1, 1])
         with col1:
-            st.markdown('<div class="section-title">Rankings</div>',
+            st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><line x1="7" y1="4" x2="7" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="4" x2="12" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="4" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="5" y1="5" x2="9.5" y2="3.5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/><line x1="9.5" y1="3.5" x2="14.5" y2="3.5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/><line x1="14.5" y1="3.5" x2="19" y2="5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/></svg>All-Rounder Rankings</div>',
                         unsafe_allow_html=True)
             for i, row in df.head(10).iterrows():
                 color = row["color"]
@@ -893,7 +984,7 @@ with tab3:
 # TAB 4 — HEAD TO HEAD
 # ──────────────────────────────────────────────────────
 with tab4:
-    st.markdown('<div class="section-title">Head to Head Comparison</div>',
+    st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><line x1="4" y1="20" x2="20" y2="4" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="4" y1="4" x2="20" y2="20" stroke="#00d4aa" stroke-width="2.5" stroke-linecap="round"/></svg>Head to Head Comparison</div>',
                 unsafe_allow_html=True)
     all_players = []
     if scores["batting"] is not None:
@@ -1037,7 +1128,7 @@ with tab4:
 # TAB 5 — SEASON TRENDS
 # ──────────────────────────────────────────────────────
 with tab5:
-    st.markdown('<div class="section-title">Season by Season Trends</div>',
+    st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><polyline points="3,17 9,11 13,15 21,7" stroke="#00d4aa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17,7 21,7 21,11" stroke="#00d4aa" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Season by Season Trends</div>',
                 unsafe_allow_html=True)
     raw = load_raw_sample()
     if raw is not None and "season" in raw.columns:
@@ -1083,7 +1174,7 @@ with tab5:
         fig3.update_layout(**plotly_dark(), coloraxis_showscale=False)
         st.plotly_chart(fig3, use_container_width=True)
 
-        st.markdown('<div class="section-title">Season Data Table</div>',
+        st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><line x1="7" y1="4" x2="7" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="12" y1="4" x2="12" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="17" y1="4" x2="17" y2="20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><line x1="5" y1="5" x2="9.5" y2="3.5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/><line x1="9.5" y1="3.5" x2="14.5" y2="3.5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/><line x1="14.5" y1="3.5" x2="19" y2="5" stroke="#f0b429" stroke-width="1.5" stroke-linecap="round"/></svg>Season Data Table</div>',
                     unsafe_allow_html=True)
         st.dataframe(sr[["season","matches","total_runs",
                           "avg_score","run_rate"]].sort_values(
@@ -1096,7 +1187,7 @@ with tab5:
 # TAB 6 — BEST XI
 # ──────────────────────────────────────────────────────
 with tab6:
-    st.markdown('<div class="section-title">🌟 Predicted Best XI — IPL 2025</div>',
+    st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><path d="M2 17L5 7l5 5 4-8 4 8 5-5 3 10H2z" fill="#f0b429" stroke="#d4990a" stroke-width="0.5"/><rect x="2" y="17" width="20" height="3" rx="1" fill="#f0b429"/></svg>Predicted Best XI — IPL 2025</div>',
                 unsafe_allow_html=True)
     if (scores["batting"] is not None and
         scores["bowling"] is not None and
@@ -1198,7 +1289,7 @@ with tab6:
             st.plotly_chart(fig, use_container_width=True)
 
             # Score bars
-            st.markdown('<div class="section-title" style="font-size:1rem">Score Breakdown</div>',
+            st.markdown('<div class="section-title" style="font-size:1rem"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><polyline points="3,17 9,11 13,15 21,7" stroke="#00d4aa" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17,7 21,7 21,11" stroke="#00d4aa" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Score Breakdown</div>',
                         unsafe_allow_html=True)
             xi_df = pd.DataFrame(best_xi)
             fig2  = px.bar(xi_df, x="score", y="player",
@@ -1217,7 +1308,7 @@ with tab6:
 # TAB 7 — PLAYER SEARCH
 # ──────────────────────────────────────────────────────
 with tab7:
-    st.markdown('<div class="section-title">Player Search</div>',
+    st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/><line x1="16.5" y1="16.5" x2="22" y2="22" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>Player Search</div>',
                 unsafe_allow_html=True)
     search = st.text_input("", placeholder="🔍  Search — e.g. Kohli, Bumrah, Narine...",
                            label_visibility="collapsed")
