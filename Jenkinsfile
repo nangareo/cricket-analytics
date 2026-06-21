@@ -2,15 +2,21 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME     = "cricket-analytics"
-        CONTAINER_NAME = "cricket-dashboard"
-        PORT           = "8501"
-        ECR_URI        = "526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest"
-        AWS_REGION     = "ap-south-1"
-        ECR_REGISTRY   = "526002960065.dkr.ecr.ap-south-1.amazonaws.com"
+        DOCKERHUB_USER  = "omkarnangare"
+        IMAGE_NAME      = "cricket-analytics"
+        CONTAINER_NAME  = "cricket-dashboard"
+        IMAGE_TAG       = "${DOCKERHUB_USER}/${IMAGE_NAME}:latest"
+        IMAGE_TAG_BUILD = "${DOCKERHUB_USER}/${IMAGE_NAME}:build-${BUILD_NUMBER}"
+        PORT            = "8501"
+    }
+
+    options {
+        timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 echo '📥 Pulling latest code from GitHub...'
@@ -18,65 +24,83 @@ pipeline {
             }
         }
 
-        stage('Pull from ECR') {
+        stage('Build Docker Image') {
             steps {
-                echo '📦 Pulling Docker image from ECR...'
-                withCredentials([
-                    string(credentialsId: 'AWS_ACCESS_KEY_ID',     variable: 'AWS_KEY'),
-                    string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET')
-                ]) {
-                    sh '''
-                        export AWS_ACCESS_KEY_ID=$AWS_KEY
-                        export AWS_SECRET_ACCESS_KEY=$AWS_SECRET
-                        export AWS_DEFAULT_REGION=ap-south-1
-                        aws ecr get-login-password --region ap-south-1 | \
-                        docker login --username AWS --password-stdin 526002960065.dkr.ecr.ap-south-1.amazonaws.com
-                        docker pull 526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest
-                        docker tag  526002960065.dkr.ecr.ap-south-1.amazonaws.com/cricket-analytics:latest cricket-analytics:latest
-                    '''
+                echo '🐳 Building Docker image...'
+                sh """
+                    docker build -t ${IMAGE_TAG} -t ${IMAGE_TAG_BUILD} .
+                """
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '✅ Running basic smoke test on image...'
+                sh """
+                    docker run --rm ${IMAGE_TAG} python -c "import streamlit, pandas, plotly; print('Imports OK')"
+                """
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                echo '📤 Pushing image to Docker Hub...'
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DH_USER',
+                    passwordVariable: 'DH_PASS'
+                )]) {
+                    sh """
+                        echo \$DH_PASS | docker login -u \$DH_USER --password-stdin
+                        docker push ${IMAGE_TAG}
+                        docker push ${IMAGE_TAG_BUILD}
+                    """
                 }
             }
         }
 
-        stage('Stop Old Container') {
+        stage('Deploy') {
             steps {
-                echo '🛑 Stopping old container...'
-                sh 'docker stop ${CONTAINER_NAME} || true'
-                sh 'docker rm   ${CONTAINER_NAME} || true'
-            }
-        }
-
-        stage('Run New Container') {
-            steps {
-                echo '🚀 Starting new container...'
-                sh '''
-                    docker run -d \
-                        --name cricket-dashboard \
-                        --restart always \
-                        -p 8501:8501 \
+                echo '🚀 Deploying new container...'
+                sh """
+                    docker pull ${IMAGE_TAG}
+                    docker stop ${CONTAINER_NAME} || true
+                    docker rm ${CONTAINER_NAME} || true
+                    docker run -d --name ${CONTAINER_NAME} --restart always \
+                        -p ${PORT}:${PORT} \
                         -v /home/ubuntu/cricket-data:/app/data \
-                        cricket-analytics:latest \
-                        streamlit run dashboard/app.py \
-                        --server.port=8501 \
-                        --server.address=0.0.0.0
-                '''
+                        ${IMAGE_TAG}
+                """
             }
         }
 
         stage('Verify') {
             steps {
-                echo '✅ Verifying container is running...'
-                sh 'docker ps | grep cricket-dashboard'
+                echo '🔍 Verifying deployment...'
+                sh """
+                    sleep 5
+                    docker ps | grep ${CONTAINER_NAME}
+                """
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                echo '🧹 Removing dangling images...'
+                sh 'docker image prune -f'
             }
         }
     }
 
     post {
         success {
-            echo '🎉 Dashboard live at http://13.126.172.252:8501'
+            echo '🎉 Deployment successful! Dashboard live at http://13.126.172.252:8501'
         }
         failure {
-            echo '❌ Deployment failed! Check logs above.'
+            echo '❌ Pipeline failed — check logs above.'
+        }
+        always {
+            sh 'docker logout || true'
         }
     }
 }
