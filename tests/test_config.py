@@ -23,7 +23,7 @@ def test_seasons_are_valid():
     import config
     for season in config.ALL_SEASONS:
         assert season.isdigit(), f"Season {season} is not a valid year"
-        assert 2008 <= int(season) <= 2025, f"Season {season} out of range"
+        assert 2008 <= int(season) <= 2026, f"Season {season} out of range"
     print("✅ Seasons test passed!")
 
 def test_retired_players_are_strings():

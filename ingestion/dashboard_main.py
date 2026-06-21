@@ -12,7 +12,7 @@ from ingestion.filter_selector import save_filter
 from dashboard.ipl_teams import get_team_color, get_team_info, PLAYER_TEAMS, IPL_TEAMS, avatar_html
 
 st.set_page_config(
-    page_title="Cricket Analytics | IPL 2025",
+    page_title="Cricket Analytics | IPL 2026",
     page_icon="🏏",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -561,7 +561,7 @@ st.markdown("""
         </svg>
     </div>
     <div class="hero-title">CRICKET <span>ANALYTICS</span></div>
-    <div class="hero-sub">IPL Intelligence Platform &nbsp;·&nbsp; 2008 – 2025</div>
+    <div class="hero-sub">IPL Intelligence Platform &nbsp;·&nbsp; 2008 – 2026</div>
     <div style="margin-top:0.8rem;"><span class="hero-badge">🏆 IPL 2026 — RCB Back-to-Back Champions</span></div>
     <div class="hero-stats-strip">
         <div class="hero-stat-item"><div class="hero-stat-num">18</div><div class="hero-stat-lbl">Seasons</div></div>
@@ -601,7 +601,7 @@ div[data-testid="stHorizontalBlock"] > div:nth-last-child(2) button {
 
 # Filter state defaults
 if "filter_label"     not in st.session_state:
-    st.session_state.filter_label     = "All Time  •  2008–2025"
+    st.session_state.filter_label     = "All Time  •  2008–2026"
     st.session_state.selected_seasons = None
     st.session_state.min_matches      = config.MIN_MATCHES
     st.session_state.top_n            = 10
@@ -641,9 +641,9 @@ if apply:
     if filter_type == "All Time":
         sel, lbl = None, "All Time  •  2008–2025"
     elif filter_type == "Last 3 Seasons":
-        sel, lbl = ["2023","2024","2025"], "Last 3 Seasons"
+        sel, lbl = ["2024","2025","2026"], "Last 3 Seasons"
     elif filter_type == "Last 5 Seasons":
-        sel, lbl = ["2021","2022","2023","2024","2025"], "Last 5 Seasons"
+        sel, lbl = ["2022","2023","2024","2025","2026"], "Last 5 Seasons"
     elif filter_type == "Single Season":
         sel, lbl = [season_pick], f"IPL {season_pick}"
     elif filter_type == "Custom Range":
@@ -1365,7 +1365,7 @@ st.markdown("""
     Data: Cricsheet.org &nbsp; • &nbsp;
     Built with Python · Streamlit · Plotly &nbsp; • &nbsp;
     100% Free & Open Source &nbsp; • &nbsp;
-    🏆 IPL 2025 — RCB Champions
+    🏆 IPL 2026 — RCB Back-to-Back Champions
 </div>
 """, unsafe_allow_html=True)
 # ── TAB 9 — LIVE SCORES (Cricbuzz Style) ──────────────

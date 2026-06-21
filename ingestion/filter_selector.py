@@ -38,9 +38,9 @@ def show_menu():
         print(f"📌 Last used: {saved['filter_type']} → {saved['value']}")
 
     print("\nHow do you want to filter player data?\n")
-    print("  1️⃣   All Time (2008 - 2025)")
-    print("  2️⃣   Last 3 Seasons (2023, 2024, 2025)")
-    print("  3️⃣   Last 5 Seasons (2021 - 2025)")
+    print("  1️⃣   All Time (2008 - 2026)")
+    print("  2️⃣   Last 3 Seasons (2024, 2025, 2026)")
+    print("  3️⃣   Last 5 Seasons (2022 - 2026)")
     print("  4️⃣   Pick a single IPL Season")
     print("  5️⃣   Pick a custom year range")
     print("  6️⃣   Pick multiple specific seasons")
@@ -116,17 +116,17 @@ def run_filter_selector():
     if choice == '1':
         # All time
         selected_seasons = None
-        label = "All Time (2008-2025)"
+        label = "All Time (2008-2026)"
 
     elif choice == '2':
         # Last 3 seasons
-        selected_seasons = ["2023", "2024", "2025"]
-        label = "Last 3 Seasons (2023-2025)"
+        selected_seasons = ["2024", "2025", "2026"]
+        label = "Last 3 Seasons (2024-2026)"
 
     elif choice == '3':
         # Last 5 seasons
-        selected_seasons = ["2021", "2022", "2023", "2024", "2025"]
-        label = "Last 5 Seasons (2021-2025)"
+        selected_seasons = ["2022", "2023", "2024", "2025", "2026"]
+        label = "Last 5 Seasons (2022-2026)"
 
     elif choice == '4':
         # Single season

@@ -1,5 +1,5 @@
 # ============================================
-# IPL TEAMS - COMPLETE 2025
+# IPL TEAMS - COMPLETE 2026
 # All 192 Cricsheet aliases resolved
 # ============================================
 
