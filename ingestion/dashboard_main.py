@@ -562,7 +562,7 @@ st.markdown("""
     </div>
     <div class="hero-title">CRICKET <span>ANALYTICS</span></div>
     <div class="hero-sub">IPL Intelligence Platform &nbsp;·&nbsp; 2008 – 2025</div>
-    <div style="margin-top:0.8rem;"><span class="hero-badge">🏆 IPL 2025 — RCB Champions</span></div>
+    <div style="margin-top:0.8rem;"><span class="hero-badge">🏆 IPL 2026 — RCB Back-to-Back Champions</span></div>
     <div class="hero-stats-strip">
         <div class="hero-stat-item"><div class="hero-stat-num">18</div><div class="hero-stat-lbl">Seasons</div></div>
         <div class="hero-stat-item"><div class="hero-stat-num">1000+</div><div class="hero-stat-lbl">Players</div></div>
@@ -668,10 +668,11 @@ st.markdown("<hr style='border:none;border-top:1px solid #1e2d3d;margin:0.5rem 0
             unsafe_allow_html=True)
 
 # ── TABS ─────────────────────────────────────────────
-tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8 = st.tabs([
+tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9 = st.tabs([
     "🏏 BATTING", "🎯 BOWLING", "⚡ ALL-ROUNDERS",
     "⚔️ HEAD TO HEAD", "📈 SEASON TRENDS",
-    "👑 BEST XI", "🔎 PLAYER SEARCH", "🏟️ TEAM INTEL"
+    "👑 BEST XI", "🔎 PLAYER SEARCH", "🏟️ TEAM INTEL",
+    "🔴 LIVE SCORES"
 ])
 
 # ──────────────────────────────────────────────────────
@@ -1367,3 +1368,463 @@ st.markdown("""
     🏆 IPL 2025 — RCB Champions
 </div>
 """, unsafe_allow_html=True)
+# ── TAB 9 — LIVE SCORES (Cricbuzz Style) ──────────────
+with tab9:
+    import urllib.request as _ur, json as _json
+
+    API_KEY = "c83bbc46-e3c7-4a77-8b28-a9e4d7785183"
+
+    # ── CSS ──
+    st.markdown("""
+<style>
+@keyframes livepulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.live-hdr{display:flex;align-items:center;gap:10px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:14px;}
+.live-dot{width:11px;height:11px;background:#ff4444;border-radius:50%;animation:livepulse 1.2s infinite;flex-shrink:0;}
+.live-title{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;letter-spacing:2px;color:#f0f6ff;}
+.live-src{font-size:0.68rem;color:#8b949e;margin-left:auto;}
+.ipl-badge-s{display:inline-block;background:#1a73e8;color:#fff;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:8px;letter-spacing:1px;}
+.result-badge-s{display:inline-block;background:rgba(29,185,84,0.15);color:#1db954;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:8px;}
+.live-badge-s{display:inline-block;background:rgba(255,68,68,0.15);color:#ff4444;font-size:0.62rem;font-weight:700;padding:2px 7px;border-radius:8px;}
+.m-card{background:rgba(22,27,34,0.95);border:0.5px solid rgba(255,255,255,0.07);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.m-card-ipl{background:rgba(22,27,34,0.95);border:0.5px solid rgba(255,255,255,0.07);border-left:3px solid #1a73e8;border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.m-card-live{background:rgba(22,27,34,0.95);border:0.5px solid rgba(255,255,255,0.07);border-left:3px solid #ff4444;border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.m-top{display:flex;justify-content:space-between;align-items:center;padding:9px 14px;border-bottom:0.5px solid rgba(255,255,255,0.06);}
+.m-top-name{font-size:0.7rem;color:#8b949e;}
+.m-body{padding:12px 14px;}
+.t-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.t-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;flex-shrink:0;}
+.t-name{font-size:0.88rem;font-weight:500;color:#f0f6ff;flex:1;}
+.t-score{font-size:1rem;font-weight:600;color:#f0f6ff;text-align:right;}
+.t-score-dim{font-size:1rem;font-weight:600;color:#8b949e;text-align:right;}
+.t-overs{font-size:0.68rem;color:#8b949e;text-align:right;}
+.m-divider{height:0.5px;background:rgba(255,255,255,0.06);margin:8px 0;}
+.m-status-won{font-size:0.75rem;color:#1db954;font-weight:600;}
+.m-status-live{font-size:0.75rem;color:#ff4444;font-weight:600;}
+.m-status-norm{font-size:0.75rem;color:#8b949e;}
+.section-sep{font-size:0.68rem;font-weight:600;color:#8b949e;letter-spacing:2px;text-transform:uppercase;margin:14px 0 8px;padding-left:2px;}
+.no-ipl-msg{text-align:center;padding:2.5rem 1rem;background:rgba(22,27,34,0.8);border-radius:14px;border:0.5px solid rgba(255,255,255,0.06);}
+.innings-hdr{font-size:0.7rem;font-weight:600;color:#8b949e;letter-spacing:1.5px;text-transform:uppercase;padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px;margin-bottom:6px;margin-top:8px;}
+.sc-tbl{width:100%;border-collapse:collapse;font-size:0.72rem;margin-bottom:10px;}
+.sc-tbl th{color:#8b949e;font-weight:500;padding:5px 6px;text-align:right;border-bottom:0.5px solid rgba(255,255,255,0.06);}
+.sc-tbl th:first-child,.sc-tbl th:nth-child(2){text-align:left;}
+.sc-tbl td{padding:6px 6px;text-align:right;color:#c9d1d9;border-bottom:0.5px solid rgba(255,255,255,0.04);}
+.sc-tbl td:first-child{text-align:left;color:#f0f6ff;font-weight:500;}
+.sc-tbl td:nth-child(2){text-align:left;color:#8b949e;font-size:0.65rem;}
+.sc-tbl tr:last-child td{border-bottom:none;}
+.sc-hl{color:#1db954 !important;font-weight:600 !important;}
+.sc-total-row{display:flex;justify-content:space-between;padding:6px 8px;background:rgba(29,185,84,0.06);border-radius:6px;margin-bottom:6px;}
+.sc-total-row span{font-size:0.75rem;font-weight:600;color:#f0f6ff;}
+</style>
+<div class="live-hdr">
+    <div class="live-dot"></div>
+    <span class="live-title">LIVE CRICKET SCORES</span>
+    <span class="live-src">CricketData.org · 60s cache</span>
+</div>
+""", unsafe_allow_html=True)
+
+    if st.button("Refresh Now", key="live_refresh_v3"):
+        st.cache_data.clear()
+        st.rerun()
+
+    @st.cache_data(ttl=60)
+    def _fetch_matches():
+        import time as _time
+        for attempt in range(3):
+            try:
+                req = _ur.Request(
+                    "https://api.cricapi.com/v1/currentMatches?apikey=" + API_KEY + "&offset=0",
+                    headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"}
+                )
+                with _ur.urlopen(req, timeout=20) as r:
+                    d = _json.loads(r.read())
+                    if d.get("status") == "success":
+                        return d.get("data", []), None
+                    return [], d.get("reason", "error")
+            except Exception as e:
+                if attempt == 2:
+                    return [], str(e)
+                _time.sleep(2)
+        return [], "Failed after 3 attempts"
+
+    @st.cache_data(ttl=60)
+    def _fetch_scorecard(match_id):
+        try:
+            req = _ur.Request(
+                "https://api.cricapi.com/v1/match_info?apikey=" + API_KEY + "&id=" + match_id,
+                headers={"User-Agent": "Mozilla/5.0"}
+            )
+            with _ur.urlopen(req, timeout=20) as r:
+                d = _json.loads(r.read())
+                if d.get("status") == "success":
+                    return d.get("data", {})
+                return {}
+        except:
+            return {}
+
+    def _team_color(name):
+        c = {
+            "Mumbai Indians":("#dbeafe","#1d4ed8"),
+            "Chennai Super Kings":("#fef9c3","#854d0e"),
+            "Royal Challengers":("#fee2e2","#991b1b"),
+            "Kolkata Knight Riders":("#ede9fe","#5b21b6"),
+            "Delhi Capitals":("#dbeafe","#1e3a5f"),
+            "Sunrisers Hyderabad":("#ffedd5","#9a3412"),
+            "Rajasthan Royals":("#fce7f3","#9d174d"),
+            "Punjab Kings":("#fee2e2","#7f1d1d"),
+            "Lucknow Super Giants":("#e0f2fe","#075985"),
+            "Gujarat Titans":("#f0fdf4","#14532d"),
+        }
+        for k,(bg,fg) in c.items():
+            if k.lower() in name.lower():
+                return bg, fg
+        return "rgba(255,255,255,0.06)","#8b949e"
+
+    def _abbr(name):
+        a = {
+            "Mumbai Indians":"MI","Chennai Super Kings":"CSK",
+            "Royal Challengers Bengaluru":"RCB","Royal Challengers Bangalore":"RCB",
+            "Kolkata Knight Riders":"KKR","Delhi Capitals":"DC",
+            "Sunrisers Hyderabad":"SRH","Rajasthan Royals":"RR",
+            "Punjab Kings":"PBKS","Lucknow Super Giants":"LSG","Gujarat Titans":"GT"
+        }
+        for k,v in a.items():
+            if k.lower() in name.lower():
+                return v
+        return name[:3].upper()
+
+    def _render_scorecard(match_id):
+        sc = _fetch_scorecard(match_id)
+        if not sc:
+            st.markdown(
+                '<div style="text-align:center;padding:1.5rem;background:rgba(255,255,255,0.02);'
+                'border-radius:10px;border:0.5px solid rgba(255,255,255,0.06);">'
+                '<div style="font-size:1.5rem;margin-bottom:8px;">🏏</div>'
+                '<div style="font-size:0.82rem;color:#8b949e;">Scorecard unavailable</div>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+            return
+        _render_full_scorecard(sc)
+
+    def _render_full_scorecard(sc):
+
+        score_arr  = sc.get("score", [])
+        teams      = sc.get("teams", [])
+        team_info  = sc.get("teamInfo", [])
+        toss_w     = sc.get("tossWinner","")
+        toss_c     = sc.get("tossChoice","")
+        winner     = sc.get("matchWinner","")
+        status     = sc.get("status","")
+        venue      = sc.get("venue","")
+        date_str   = sc.get("date","")
+        started    = sc.get("matchStarted", False)
+        ended      = sc.get("matchEnded", False)
+        mtype      = sc.get("matchType","t20").lower()
+        total_overs = 20 if mtype == "t20" else (50 if mtype == "odi" else 90)
+
+        # Team logo map
+        logo_map = {}
+        for ti in team_info:
+            logo_map[ti.get("name","")] = ti.get("img","")
+
+        # ── Match summary header ──
+        toss_html = ""
+        if toss_w:
+            toss_html = (
+                '<div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;'
+                'padding:6px 10px;background:rgba(255,255,255,0.03);border-radius:8px;">'
+                '<span style="font-size:0.68rem;color:#8b949e;">🪙 Toss:</span>'
+                '<span style="font-size:0.72rem;color:#c9d1d9;">'
+                + toss_w.title() + " won & chose to " + toss_c +
+                '</span></div>'
+            )
+
+        st.markdown(
+            '<div style="padding:10px 0 6px;">'
+            '<div style="font-size:0.68rem;color:#8b949e;margin-bottom:6px;">📍 ' + venue + ' &nbsp;·&nbsp; 📅 ' + date_str + '</div>'
+            + toss_html +
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+        # ── Innings cards ──
+        if not score_arr:
+            st.markdown(
+                '<div style="text-align:center;padding:2rem;background:rgba(255,255,255,0.02);'
+                'border-radius:12px;border:0.5px dashed rgba(255,255,255,0.1);">'
+                '<div style="font-size:2rem;margin-bottom:10px;">📊</div>'
+                '<div style="font-size:0.85rem;font-weight:600;color:#f0f6ff;margin-bottom:4px;">Scorecard Coming Soon</div>'
+                '<div style="font-size:0.75rem;color:#8b949e;">Ball-by-ball data will appear here once the match progresses</div>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+            return
+
+        # ── Innings cards ──
+        for idx, s in enumerate(score_arr):
+            inning  = s.get("inning","")
+            runs    = s.get("r",0)
+            wkts    = s.get("w",0)
+            overs   = float(s.get("o",0))
+            rr      = round(runs / overs, 2) if overs else 0
+            t_name  = inning.replace(" Inning 1","").replace(" Inning 2","").strip()
+            logo    = logo_map.get(t_name,"")
+            is_win  = t_name == winner
+            inn_num = "2nd Innings" if "Inning 2" in inning else "1st Innings"
+            is_live_inn = (idx == len(score_arr)-1) and started and not ended
+
+            # Overs progress bar
+            overs_int   = int(overs)
+            balls_extra = round((overs - overs_int) * 10)
+            total_balls = overs_int * 6 + balls_extra
+            max_balls   = total_overs * 6
+            pct         = min(100, round(total_balls / max_balls * 100))
+
+            # Projected score for live innings
+            proj = ""
+            if is_live_inn and overs > 0:
+                projected = round(rr * total_overs)
+                proj = "Proj: ~" + str(projected)
+
+            # Required RR for 2nd innings live
+            rrr_html = ""
+            if is_live_inn and idx == 1 and len(score_arr) >= 2:
+                first_inn_runs = score_arr[0].get("r",0)
+                target = first_inn_runs + 1
+                balls_left = max_balls - total_balls
+                overs_left = round(balls_left / 6, 1)
+                needed = target - runs
+                if overs_left > 0 and needed > 0:
+                    rrr = round(needed / overs_left, 2)
+                    rrr_html = (
+                        '<div style="background:rgba(255,215,0,0.08);border:0.5px solid rgba(255,215,0,0.2);'
+                        'border-radius:8px;padding:6px 10px;margin-top:8px;display:flex;justify-content:space-between;">'
+                        '<span style="font-size:0.72rem;color:#8b949e;">Need ' + str(needed) + ' off ' + str(balls_left) + ' balls</span>'
+                        '<span style="font-size:0.72rem;font-weight:600;color:#ffd700;">RRR: ' + str(rrr) + '</span>'
+                        '</div>'
+                    )
+
+            # Win probability (simple)
+            win_prob = ""
+            if is_live_inn and idx == 1 and len(score_arr) >= 2:
+                first_runs = score_arr[0].get("r",0)
+                if first_runs > 0:
+                    chase_prob = min(95, max(5, round((runs / first_runs) * 100 + (pct / 10))))
+                    bat_prob   = 100 - chase_prob
+                    bar_w      = chase_prob
+                    win_prob = (
+                        '<div style="margin-top:8px;">'
+                        '<div style="display:flex;justify-content:space-between;font-size:0.65rem;color:#8b949e;margin-bottom:4px;">'
+                        '<span>' + t_name[:15] + ' ' + str(chase_prob) + '%</span>'
+                        '<span>' + str(bat_prob) + '% ' + score_arr[0].get("inning","").replace(" Inning 1","")[:15] + '</span>'
+                        '</div>'
+                        '<div style="height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;">'
+                        '<div style="height:100%;width:' + str(bar_w) + '%;background:linear-gradient(90deg,#1db954,#ffd700);border-radius:3px;"></div>'
+                        '</div>'
+                        '</div>'
+                    )
+
+            logo_html = ""
+            if logo:
+                logo_html = '<img src="' + logo + '" width="30" height="30" style="border-radius:50%;object-fit:contain;background:#fff;padding:2px;">'
+
+            win_tag = ""
+            if is_win and ended:
+                win_tag = ' <span style="background:rgba(29,185,84,0.2);color:#1db954;font-size:0.6rem;font-weight:700;padding:2px 7px;border-radius:8px;">WON</span>'
+
+            border = "rgba(29,185,84,0.4)" if is_win and ended else ("rgba(255,68,68,0.3)" if is_live_inn else "rgba(255,255,255,0.07)")
+            bg     = "rgba(29,185,84,0.04)" if is_win and ended else ("rgba(255,68,68,0.03)" if is_live_inn else "rgba(255,255,255,0.02)")
+            live_dot = '<span style="display:inline-block;width:7px;height:7px;background:#ff4444;border-radius:50%;margin-right:5px;"></span>' if is_live_inn else ""
+
+            st.markdown(
+                '<div style="background:' + bg + ';border:0.5px solid ' + border + ';border-radius:12px;padding:12px 14px;margin-bottom:10px;">'
+                # Header row
+                '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">'
+                + logo_html +
+                '<div style="flex:1;">'
+                '<div style="font-size:0.68rem;color:#8b949e;margin-bottom:1px;">' + live_dot + inn_num + '</div>'
+                '<div style="font-size:0.88rem;font-weight:600;color:#f0f6ff;">' + t_name + win_tag + '</div>'
+                '</div>'
+                '<div style="text-align:right;">'
+                '<div style="font-family:Rajdhani,sans-serif;font-size:1.7rem;font-weight:700;color:#f0f6ff;line-height:1;">'
+                + str(runs) + '<span style="font-size:0.95rem;color:#8b949e;font-weight:400;">/' + str(wkts) + '</span></div>'
+                '<div style="font-size:0.65rem;color:#8b949e;">' + str(overs) + ' ov</div>'
+                '</div></div>'
+                # Overs progress bar
+                '<div style="margin-bottom:8px;">'
+                '<div style="display:flex;justify-content:space-between;font-size:0.62rem;color:#8b949e;margin-bottom:3px;">'
+                '<span>Overs: ' + str(overs) + ' / ' + str(total_overs) + '</span>'
+                '<span>' + proj + '</span>'
+                '</div>'
+                '<div style="height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">'
+                '<div style="height:100%;width:' + str(pct) + '%;background:linear-gradient(90deg,#1db954,#4fc3f7);border-radius:2px;"></div>'
+                '</div></div>'
+                # Stats strip
+                '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">'
+                '<div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:5px;text-align:center;">'
+                '<div style="font-size:0.6rem;color:#8b949e;">Runs</div>'
+                '<div style="font-size:0.85rem;font-weight:600;color:#f0f6ff;">' + str(runs) + '</div>'
+                '</div>'
+                '<div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:5px;text-align:center;">'
+                '<div style="font-size:0.6rem;color:#8b949e;">Wkts</div>'
+                '<div style="font-size:0.85rem;font-weight:600;color:#f0f6ff;">' + str(wkts) + '</div>'
+                '</div>'
+                '<div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:5px;text-align:center;">'
+                '<div style="font-size:0.6rem;color:#8b949e;">CRR</div>'
+                '<div style="font-size:0.85rem;font-weight:600;color:#1db954;">' + str(rr) + '</div>'
+                '</div>'
+                '<div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:5px;text-align:center;">'
+                '<div style="font-size:0.6rem;color:#8b949e;">Balls</div>'
+                '<div style="font-size:0.85rem;font-weight:600;color:#f0f6ff;">' + str(total_balls) + '</div>'
+                '</div>'
+                '</div>'
+                + rrr_html + win_prob +
+                '</div>',
+                unsafe_allow_html=True
+            )
+
+        # ── Result banner ──
+        if ended and status:
+            st.markdown(
+                '<div style="background:rgba(29,185,84,0.08);border:0.5px solid rgba(29,185,84,0.3);'
+                'border-radius:10px;padding:10px 14px;text-align:center;margin-top:4px;">'
+                '<span style="font-size:0.85rem;font-weight:600;color:#1db954;">🏆 ' + status + '</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+        elif started and not ended:
+            st.markdown(
+                '<div style="background:rgba(255,68,68,0.06);border:0.5px solid rgba(255,68,68,0.2);'
+                'border-radius:10px;padding:8px 14px;text-align:center;margin-top:4px;">'
+                '<span style="font-size:0.78rem;color:#ff4444;">🔴 Match in Progress · Ball-by-ball data requires premium API plan</span>'
+                '</div>',
+                unsafe_allow_html=True
+            )
+
+    def _render_match(m, is_ipl=False):
+        mid     = m.get("id","")
+        name    = m.get("name","")
+        status  = m.get("status","")
+        mtype   = m.get("matchType","").upper()
+        venue   = m.get("venue","")
+        date    = m.get("date","")
+        started = m.get("matchStarted",False)
+        ended   = m.get("matchEnded",False)
+        teams   = m.get("teams",[])
+        scores  = m.get("score",[])
+
+        card_cls = "m-card-ipl" if is_ipl else ("m-card-live" if (started and not ended) else "m-card")
+        status_cls = "m-status-won" if ended else ("m-status-live" if (started and not ended) else "m-status-norm")
+        badges = ""
+        if is_ipl:
+            badges += '<span class="ipl-badge-s">IPL 2026</span> '
+        if started and not ended:
+            badges += '<span class="live-badge-s">LIVE</span>'
+        elif ended:
+            badges += '<span class="result-badge-s">RESULT</span>'
+
+        score_map = {}
+        for s in scores:
+            inn = s.get("inning","")
+            for t in teams:
+                if t.lower().split()[0] in inn.lower():
+                    score_map[t] = (str(s.get("r","-")), str(s.get("w","-")), str(s.get("o","-")))
+
+        team_rows = ""
+        for i, t in enumerate(teams[:2]):
+            bg, fg = _team_color(t)
+            abbr   = _abbr(t)
+            sc     = score_map.get(t)
+            if sc:
+                sc_cls = "t-score" if i == 0 or ended else "t-score-dim"
+                sc_html = '<div class="' + sc_cls + '">' + sc[0] + "/" + sc[1] + '</div><div class="t-overs">(' + sc[2] + ' ov)</div>'
+            else:
+                sc_html = '<div class="t-score-dim" style="font-size:0.75rem;">Yet to bat</div>'
+            team_rows += (
+                '<div class="t-row">'
+                '<div class="t-icon" style="background:' + bg + ';color:' + fg + ';">' + abbr + '</div>'
+                '<span class="t-name">' + t + '</span>'
+                '<div>' + sc_html + '</div>'
+                '</div>'
+            )
+
+        match_title = name.split(",")[0] if "," in name else name
+        venue_safe  = venue.replace("&","&amp;")
+
+        html = (
+            '<div class="' + card_cls + '">'
+            '<div class="m-top">'
+            '<span class="m-top-name">📍 ' + venue_safe + ' &nbsp;·&nbsp; 📅 ' + date + '</span>'
+            '<div style="display:flex;gap:6px;align-items:center;">'
+            '<span style="font-size:0.65rem;color:#8b949e;">' + mtype + '</span>'
+            + badges +
+            '</div></div>'
+            '<div class="m-body">'
+            '<div style="font-size:0.78rem;font-weight:600;color:#f0f6ff;margin-bottom:8px;">' + match_title + '</div>'
+            + team_rows +
+            '<div class="m-divider"></div>'
+            '<span class="' + status_cls + '">' + status + '</span>'
+            '</div></div>'
+        )
+        st.markdown(html, unsafe_allow_html=True)
+
+        with st.expander("📋 Full Scorecard", expanded=False):
+            if mid:
+                _render_scorecard(mid)
+            else:
+                st.caption("Match ID not available")
+
+    # ── Main render ──
+    matches, err = _fetch_matches()
+
+    if err:
+        st.error("Could not fetch scores: " + str(err))
+    elif not matches:
+        st.info("No matches right now. Check back during match hours!")
+    else:
+        ipl      = [m for m in matches if "Indian Premier League" in m.get("name","")]
+        others   = [m for m in matches if "Indian Premier League" not in m.get("name","")]
+        live_now = [m for m in matches if m.get("matchStarted") and not m.get("matchEnded")]
+        upcoming = [m for m in matches if not m.get("matchStarted")]
+
+        st.markdown(
+            '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;">'
+            '<div class="stat-card"><div class="stat-value" style="color:#1a73e8;">' + str(len(ipl)) + '</div><div class="stat-label">IPL 2026</div></div>'
+            '<div class="stat-card"><div class="stat-value" style="color:#ff4444;">' + str(len(live_now)) + '</div><div class="stat-label">Live Now</div></div>'
+            '<div class="stat-card"><div class="stat-value" style="color:#ffd700;">' + str(len(upcoming)) + '</div><div class="stat-label">Upcoming</div></div>'
+            '<div class="stat-card"><div class="stat-value">' + str(len(matches)) + '</div><div class="stat-label">Total</div></div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+
+        filt = st.radio("Show:", ["IPL 2026", "All Matches", "Live Only"],
+                        horizontal=True, key="live_filter_v3")
+
+        if filt == "IPL 2026":
+            if not ipl:
+                st.markdown(
+                    '<div class="no-ipl-msg">'
+                    '<div style="font-size:2.5rem;">🏏</div>'
+                    '<div style="font-family:Rajdhani,sans-serif;font-size:1.3rem;color:#f0f6ff;margin:0.8rem 0;font-weight:700;">No IPL Matches Right Now</div>'
+                    '<div style="color:#8b949e;font-size:0.82rem;">IPL 2026 playoffs · Matches at 3:30 PM &amp; 7:30 PM IST</div>'
+                    '</div>',
+                    unsafe_allow_html=True
+                )
+            else:
+                for m in ipl:
+                    _render_match(m, is_ipl=True)
+        elif filt == "Live Only":
+            if not live_now:
+                st.info("No live matches at the moment.")
+            else:
+                for m in live_now:
+                    _render_match(m, is_ipl="Indian Premier League" in m.get("name",""))
+        else:
+            if ipl:
+                st.markdown('<div class="section-sep">🏆 IPL 2026</div>', unsafe_allow_html=True)
+                for m in ipl:
+                    _render_match(m, is_ipl=True)
+            if others:
+                st.markdown('<div class="section-sep">🌍 Other Matches</div>', unsafe_allow_html=True)
+                for m in others:
+                    _render_match(m, is_ipl=False)

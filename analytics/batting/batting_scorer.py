@@ -12,23 +12,59 @@ warnings.filterwarnings('ignore')
 DATA_FOLDER = "data/raw"
 
 def load_all_matches(folder):
-    """Load all CSV match files into one big table"""
+    """Load all CSV match files into one big table — Cricsheet csv2 combined format"""
     all_files = [f for f in os.listdir(folder) if f.endswith('.csv') and '_info' not in f]
     print(f"📂 Found {len(all_files)} match files...")
 
+    BALL_COLUMNS = [
+        "type", "innings", "ball", "batting_team", "batter", "non_striker",
+        "bowler", "runs_batter", "runs_extras", "wides", "noballs", "byes",
+        "legbyes", "penalty", "wicket_type", "player_dismissed", "other_wicket_type",
+        "other_player_dismissed", "extra_1", "extra_2", "extra_3", "extra_4"
+    ]
+
     all_data = []
+    skipped = 0
     for file in all_files:
         filepath = os.path.join(folder, file)
         try:
-            df = pd.read_csv(filepath)
+            rows = []
+            with open(filepath, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.rstrip("\n")
+                    if line.startswith("ball,"):
+                        parts = line.split(",")
+                        rows.append(parts)
+            if not rows:
+                skipped += 1
+                continue
+
+            max_len = len(BALL_COLUMNS)
+            fixed_rows = []
+            for r in rows:
+                if len(r) < max_len:
+                    r = r + [""] * (max_len - len(r))
+                elif len(r) > max_len:
+                    r = r[:max_len]
+                fixed_rows.append(r)
+
+            df = pd.DataFrame(fixed_rows, columns=BALL_COLUMNS)
+            df["innings"]     = pd.to_numeric(df["innings"], errors="coerce")
+            df["runs_batter"] = pd.to_numeric(df["runs_batter"], errors="coerce").fillna(0)
+            df["runs_extras"] = pd.to_numeric(df["runs_extras"], errors="coerce").fillna(0)
+            df["match_id"]    = file.replace(".csv", "")
+
             all_data.append(df)
         except Exception as e:
             print(f"⚠️  Skipping {file}: {e}")
+            skipped += 1
+
+    if not all_data:
+        raise ValueError("No objects to concatenate — check data folder path")
 
     combined = pd.concat(all_data, ignore_index=True)
-    print(f"✅ Loaded {len(combined)} total balls across all matches!")
+    print(f"✅ Loaded {len(combined)} total balls across {len(all_data)} matches! (skipped {skipped})")
     return combined
-
 def calculate_batting_scores(df):
     """Calculate batting metrics for every batsman"""
     print("\n⚙️  Calculating batting scores...")
@@ -168,6 +204,11 @@ if __name__ == "__main__":
 
     # Step 1: Load all match data
     df = load_all_matches(DATA_FOLDER)
+    df = df.rename(columns={
+        "batter": "striker",
+        "runs_batter": "runs_off_bat"
+    })
+    df['ball'] = pd.to_numeric(df['ball'], errors='coerce')
 
     # Step 2: Calculate metrics
     batting = calculate_batting_scores(df)

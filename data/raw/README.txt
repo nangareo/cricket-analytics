@@ -5,17 +5,14 @@ The background
 --------------
 
 As an experiment, after being asked by a user of the site, I started
-converting the YAML data provided on the site into a CSV format. That
-initial version was heavily influenced by the format used by the baseball
-project Retrosheet. I wasn't sure of the usefulness of my CSV format, but
-nothing better was suggested so I persisted with it. Later Ashwin Raman
-(https://twitter.com/AshwinRaman_) send me a detailed example of a format
-he felt might work and, liking what I saw, I started to produce data in
-a slightly modified version of that initial example.
+converting the IPL data from YAML into this CSV format. This then expanded
+to include international T20s, for both women and men, before, finally,
+expanding again to cover all matches we provide.
 
 This particular zip folder contains the CSV data for...
   All Men's Indian Premier League matches
-...for which we have data.
+...for which we have data, and is loosely based on the format that Retrosheet
+uses for baseball, with some suitable hacks built in.
 
 How you can help
 ----------------
@@ -27,8 +24,9 @@ format? General views and comments help, as well as incredibly detailed
 feedback. All information is of use to me at this stage. I can only improve
 the data if people tell me what does works and what doesn't. I'd like to make
 the data as useful as possible but I need your help to do it. Also, which of
-the 2 CSV formats do you prefer, this one or the original? Ideally I'd like
-to settle on a single CSV format so what should be kept from each?
+the 2 CSV formats do you prefer, this one or the newer "Ashwin" format?
+Ideally I'd like to settle on a single CSV format so what should be kept
+from each?
 
 Finally, any feedback as to the licence the data should be released under
 would be greatly appreciated. Licensing is a strange little world and I'd
@@ -45,80 +43,112 @@ The format of the data
 ----------------------
 
 Full documentation of this CSV format can be found at:
-  https://cricsheet.org/format/csv_ashwin/
+  https://cricsheet.org/format/csv_original/
 but the following is a brief summary of the details...
 
-This format consists of 2 files per match, although you can get all of
-the ball-by-ball data from just one of the files. The files for a match
-are named <id>.csv (for the ball-by-ball data), and <id>_info.csv (for
-the match info), where <id> is the Cricinfo id for the match. The
-ball-by-ball file contains one row per delivery in the match, while the
-match info file contains match information such as dates the match was
-played, the outcome, and lists of the players involved in the match.
+Each file has a 'version', multiple 'info' lines, and multiple 'ball' lines.
+'version' is just 1.8.0 for now, and will change as I make changes.
+The 'info' entries should be fairly self-explanatory but feel free to ask on
+Mastodon (@cricsheet@deeden.co.uk) if you're unsure. If you look carefully
+you may see some slight hints as to some data we'll be including in the full
+data files in the future.
 
-The match info file format
---------------------------
+Each 'ball' line has the following fields:
 
-The info section contains the information on the actual match, such as
-when and where it was played, any event it was part of, the type of
-match etc. The fields included in the info section will each appear as
-one or more rows in the data. Some of the fields are required, whereas
-some are optional. If a field has multiple values, such as team, then
-each value will appear on a row of it's own.
-
-The ball-by-ball file format
-----------------------------
-
-The first row of each ball-by-ball CSV file contains the headers for the
-file, with each subsequent row providing details on a single delivery.
-The headers in the file are:
-
-  * match_id
-  * season
-  * start_date
-  * venue
-  * innings
-  * ball
-  * batting_team
-  * bowling_team
-  * striker
-  * non_striker
-  * bowler
-  * runs_off_bat
-  * extras
-  * wides
-  * noballs
-  * byes
-  * legbyes
-  * penalty
-  * wicket_type
-  * player_dismissed
-  * other_wicket_type
-  * other_player_dismissed
-
-Most of the fields above should, hopefully, be self-explanatory, but some may
-benefit from clarification...
-
-"innings" contains the number of the innings within the match. If a match is
-one that would normally have 2 innings, such as a T20 or ODI, then any innings
-of more than 2 can be regarded as a super over.
-
-"ball" is a combination of the over and delivery. For example, "0.3" represents
-the 3rd ball of the 1st over.
-
-"wides", "noballs", "byes", "legbyes", and "penalty" contain the total of each
-particular type of extras, or are blank if not relevant to the delivery.
-
-If a wicket occurred on a delivery then "wicket_type" will contain the method
-of dismissal, while "player_dismissed" will indicate who was dismissed. There
-is also the, admittedly remote, possibility that a second dismissal can be
-recorded on the delivery (such as when a player retires on the same delivery
-as another dismissal occurs). In this case "other_wicket_type" will record
-the reason, while "other_player_dismissed" will show who was dismissed.
+  * The word 'ball' to identify it as such
+  * Innings number, starting from 1
+  * Over and ball
+  * Batting team name
+  * Batsman
+  * Non-striker
+  * Bowler
+  * Runs-off-bat
+  * Extras
+  * Wides
+  * No-balls
+  * Byes
+  * Leg-byes
+  * Penalty
+  * Kind of wicket, if any
+  * Dismissed played, if there was a wicket
 
 Matches included in this archive
 --------------------------------
 
+2026-05-31 - club - IPL - male - 1535465 - Gujarat Titans vs Royal Challengers Bengaluru
+2026-05-29 - club - IPL - male - 1535464 - Rajasthan Royals vs Gujarat Titans
+2026-05-27 - club - IPL - male - 1535463 - Rajasthan Royals vs Sunrisers Hyderabad
+2026-05-26 - club - IPL - male - 1535462 - Royal Challengers Bengaluru vs Gujarat Titans
+2026-05-24 - club - IPL - male - 1529313 - Delhi Capitals vs Kolkata Knight Riders
+2026-05-24 - club - IPL - male - 1529312 - Rajasthan Royals vs Mumbai Indians
+2026-05-23 - club - IPL - male - 1529311 - Lucknow Super Giants vs Punjab Kings
+2026-05-22 - club - IPL - male - 1529310 - Sunrisers Hyderabad vs Royal Challengers Bengaluru
+2026-05-21 - club - IPL - male - 1529309 - Gujarat Titans vs Chennai Super Kings
+2026-05-20 - club - IPL - male - 1529308 - Mumbai Indians vs Kolkata Knight Riders
+2026-05-19 - club - IPL - male - 1529307 - Lucknow Super Giants vs Rajasthan Royals
+2026-05-18 - club - IPL - male - 1529306 - Chennai Super Kings vs Sunrisers Hyderabad
+2026-05-17 - club - IPL - male - 1529305 - Rajasthan Royals vs Delhi Capitals
+2026-05-17 - club - IPL - male - 1529304 - Royal Challengers Bengaluru vs Punjab Kings
+2026-05-16 - club - IPL - male - 1529303 - Kolkata Knight Riders vs Gujarat Titans
+2026-05-15 - club - IPL - male - 1529302 - Chennai Super Kings vs Lucknow Super Giants
+2026-05-14 - club - IPL - male - 1529301 - Punjab Kings vs Mumbai Indians
+2026-05-13 - club - IPL - male - 1529300 - Kolkata Knight Riders vs Royal Challengers Bengaluru
+2026-05-12 - club - IPL - male - 1529299 - Gujarat Titans vs Sunrisers Hyderabad
+2026-05-11 - club - IPL - male - 1529298 - Punjab Kings vs Delhi Capitals
+2026-05-10 - club - IPL - male - 1529297 - Mumbai Indians vs Royal Challengers Bengaluru
+2026-05-10 - club - IPL - male - 1529296 - Lucknow Super Giants vs Chennai Super Kings
+2026-05-09 - club - IPL - male - 1529295 - Gujarat Titans vs Rajasthan Royals
+2026-05-08 - club - IPL - male - 1529294 - Delhi Capitals vs Kolkata Knight Riders
+2026-05-07 - club - IPL - male - 1529293 - Lucknow Super Giants vs Royal Challengers Bengaluru
+2026-05-06 - club - IPL - male - 1529292 - Sunrisers Hyderabad vs Punjab Kings
+2026-05-05 - club - IPL - male - 1529291 - Delhi Capitals vs Chennai Super Kings
+2026-05-04 - club - IPL - male - 1529290 - Lucknow Super Giants vs Mumbai Indians
+2026-05-03 - club - IPL - male - 1529289 - Punjab Kings vs Gujarat Titans
+2026-05-03 - club - IPL - male - 1529288 - Sunrisers Hyderabad vs Kolkata Knight Riders
+2026-05-02 - club - IPL - male - 1529287 - Mumbai Indians vs Chennai Super Kings
+2026-05-01 - club - IPL - male - 1529286 - Rajasthan Royals vs Delhi Capitals
+2026-04-30 - club - IPL - male - 1529285 - Royal Challengers Bengaluru vs Gujarat Titans
+2026-04-29 - club - IPL - male - 1529284 - Mumbai Indians vs Sunrisers Hyderabad
+2026-04-28 - club - IPL - male - 1529283 - Punjab Kings vs Rajasthan Royals
+2026-04-27 - club - IPL - male - 1529282 - Delhi Capitals vs Royal Challengers Bengaluru
+2026-04-26 - club - IPL - male - 1529281 - Kolkata Knight Riders vs Lucknow Super Giants
+2026-04-26 - club - IPL - male - 1529280 - Chennai Super Kings vs Gujarat Titans
+2026-04-25 - club - IPL - male - 1529279 - Rajasthan Royals vs Sunrisers Hyderabad
+2026-04-25 - club - IPL - male - 1529278 - Delhi Capitals vs Punjab Kings
+2026-04-24 - club - IPL - male - 1529277 - Gujarat Titans vs Royal Challengers Bengaluru
+2026-04-23 - club - IPL - male - 1529276 - Chennai Super Kings vs Mumbai Indians
+2026-04-22 - club - IPL - male - 1529275 - Rajasthan Royals vs Lucknow Super Giants
+2026-04-21 - club - IPL - male - 1529274 - Sunrisers Hyderabad vs Delhi Capitals
+2026-04-20 - club - IPL - male - 1529273 - Mumbai Indians vs Gujarat Titans
+2026-04-19 - club - IPL - male - 1529272 - Punjab Kings vs Lucknow Super Giants
+2026-04-19 - club - IPL - male - 1529271 - Rajasthan Royals vs Kolkata Knight Riders
+2026-04-18 - club - IPL - male - 1529270 - Sunrisers Hyderabad vs Chennai Super Kings
+2026-04-18 - club - IPL - male - 1529269 - Royal Challengers Bengaluru vs Delhi Capitals
+2026-04-17 - club - IPL - male - 1529268 - Kolkata Knight Riders vs Gujarat Titans
+2026-04-16 - club - IPL - male - 1529267 - Mumbai Indians vs Punjab Kings
+2026-04-15 - club - IPL - male - 1529266 - Lucknow Super Giants vs Royal Challengers Bengaluru
+2026-04-14 - club - IPL - male - 1529265 - Chennai Super Kings vs Kolkata Knight Riders
+2026-04-13 - club - IPL - male - 1529264 - Sunrisers Hyderabad vs Rajasthan Royals
+2026-04-12 - club - IPL - male - 1527693 - Royal Challengers Bengaluru vs Mumbai Indians
+2026-04-12 - club - IPL - male - 1527692 - Lucknow Super Giants vs Gujarat Titans
+2026-04-11 - club - IPL - male - 1527691 - Chennai Super Kings vs Delhi Capitals
+2026-04-11 - club - IPL - male - 1527690 - Sunrisers Hyderabad vs Punjab Kings
+2026-04-10 - club - IPL - male - 1527689 - Royal Challengers Bengaluru vs Rajasthan Royals
+2026-04-09 - club - IPL - male - 1527688 - Kolkata Knight Riders vs Lucknow Super Giants
+2026-04-08 - club - IPL - male - 1527687 - Gujarat Titans vs Delhi Capitals
+2026-04-07 - club - IPL - male - 1527686 - Rajasthan Royals vs Mumbai Indians
+2026-04-06 - club - IPL - male - 1527685 - Kolkata Knight Riders vs Punjab Kings
+2026-04-05 - club - IPL - male - 1527684 - Royal Challengers Bengaluru vs Chennai Super Kings
+2026-04-05 - club - IPL - male - 1527683 - Sunrisers Hyderabad vs Lucknow Super Giants
+2026-04-04 - club - IPL - male - 1527682 - Rajasthan Royals vs Gujarat Titans
+2026-04-04 - club - IPL - male - 1527681 - Mumbai Indians vs Delhi Capitals
+2026-04-03 - club - IPL - male - 1527680 - Chennai Super Kings vs Punjab Kings
+2026-04-02 - club - IPL - male - 1527679 - Sunrisers Hyderabad vs Kolkata Knight Riders
+2026-04-01 - club - IPL - male - 1527678 - Lucknow Super Giants vs Delhi Capitals
+2026-03-31 - club - IPL - male - 1527677 - Gujarat Titans vs Punjab Kings
+2026-03-30 - club - IPL - male - 1527676 - Chennai Super Kings vs Rajasthan Royals
+2026-03-29 - club - IPL - male - 1527675 - Kolkata Knight Riders vs Mumbai Indians
+2026-03-28 - club - IPL - male - 1527674 - Sunrisers Hyderabad vs Royal Challengers Bengaluru
 2025-06-03 - club - IPL - male - 1473511 - Royal Challengers Bengaluru vs Punjab Kings
 2025-06-01 - club - IPL - male - 1473510 - Mumbai Indians vs Punjab Kings
 2025-05-30 - club - IPL - male - 1473509 - Mumbai Indians vs Gujarat Titans
