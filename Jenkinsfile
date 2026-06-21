@@ -37,7 +37,10 @@ pipeline {
             steps {
                 echo '✅ Running basic smoke test on image...'
                 sh """
-                    docker run --rm ${IMAGE_TAG} python -c "import streamlit, pandas, plotly; print('Imports OK')"
+                    docker run --rm \
+                      --entrypoint python \
+                      ${IMAGE_TAG} \
+                      -c "import streamlit, pandas, plotly; print('Imports OK')"
                 """
             }
         }
