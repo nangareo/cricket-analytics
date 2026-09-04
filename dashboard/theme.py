@@ -210,7 +210,9 @@ html, body, [data-testid="stAppViewContainer"], .stApp {{
 }}
 [data-testid="stHeader"], [data-testid="stDecoration"] {{ background:transparent !important; }}
 [data-testid="stSidebar"], [data-testid="collapsedControl"] {{ display:none !important; }}
-.block-container {{ padding:var(--s5) var(--s5) var(--s7); max-width:1320px; }}
+[data-testid="stToolbar"], [data-testid="stStatusWidget"] ~ div,
+.stDeployButton, #MainMenu, footer {{ display:none !important; }}
+.block-container {{ padding:var(--s5) var(--s5) var(--s7); max-width:1240px; }}
 
 /* Numerals line up in columns. The single biggest win on a stats table. */
 .lb-stat, .lb-score, .lb-rank, .stat-value, .player-score, .xi-score,
@@ -341,9 +343,8 @@ html, body, [data-testid="stAppViewContainer"], .stApp {{
 /* ── LEADERBOARD ────────────────────────────────── */
 .lb-row {{
   display:grid;
-  grid-template-columns:30px minmax(0,1fr) 76px 76px 76px 68px;
+  grid-template-columns:30px minmax(0,1fr) 88px 88px 88px 76px;
   align-items:center; gap:var(--s3);
-  max-width:940px;
   padding:10px var(--s3);
   border-bottom:1px solid var(--border);
   transition:background .12s ease;

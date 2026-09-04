@@ -255,22 +255,22 @@ with tab1:
             <div class="stat-card">
                 <div class="stat-value">{df.iloc[0]["player"].split()[-1]}</div>
                 <div class="stat-name">{df.iloc[0]["player"]}</div>
-                <div class="stat-label">🥇 Top Batsman</div>
+                <div class="stat-label">Top Batsman</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["average"].max():.1f}</div>
                 <div class="stat-name">{df.loc[df["average"].idxmax(),"player"]}</div>
-                <div class="stat-label">📈 Best Average</div>
+                <div class="stat-label">Best Average</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["strike_rate"].max():.0f}</div>
                 <div class="stat-name">{df.loc[df["strike_rate"].idxmax(),"player"]}</div>
-                <div class="stat-label">⚡ Best Strike Rate</div>
+                <div class="stat-label">Best Strike Rate</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{int(df["total_runs"].max())}</div>
                 <div class="stat-name">{df.loc[df["total_runs"].idxmax(),"player"]}</div>
-                <div class="stat-label">🏏 Most Runs</div>
+                <div class="stat-label">Most Runs</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -355,22 +355,22 @@ with tab2:
             <div class="stat-card">
                 <div class="stat-value">{df.iloc[0]["player"].split()[-1]}</div>
                 <div class="stat-name">{df.iloc[0]["player"]}</div>
-                <div class="stat-label">🥇 Top Bowler</div>
+                <div class="stat-label">Top Bowler</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["economy"].min():.2f}</div>
                 <div class="stat-name">{df.loc[df["economy"].idxmin(),"player"]}</div>
-                <div class="stat-label">🎯 Best Economy</div>
+                <div class="stat-label">Best Economy</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{int(df["wickets"].max())}</div>
                 <div class="stat-name">{df.loc[df["wickets"].idxmax(),"player"]}</div>
-                <div class="stat-label">💥 Most Wickets</div>
+                <div class="stat-label">Most Wickets</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["dot_ball_pct"].max():.1f}%</div>
                 <div class="stat-name">{df.loc[df["dot_ball_pct"].idxmax(),"player"]}</div>
-                <div class="stat-label">⚫ Best Dot Ball %</div>
+                <div class="stat-label">Best Dot Ball %</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -439,22 +439,22 @@ with tab3:
             <div class="stat-card">
                 <div class="stat-value">{df.iloc[0]["player"].split()[-1]}</div>
                 <div class="stat-name">{df.iloc[0]["player"]}</div>
-                <div class="stat-label">🥇 Top All-rounder</div>
+                <div class="stat-label">Top All-rounder</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["batting_score"].max():.1f}</div>
                 <div class="stat-name">{df.loc[df["batting_score"].idxmax(),"player"]}</div>
-                <div class="stat-label">🏏 Best Batting</div>
+                <div class="stat-label">Best Batting</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{df["bowling_score"].max():.1f}</div>
                 <div class="stat-name">{df.loc[df["bowling_score"].idxmax(),"player"]}</div>
-                <div class="stat-label">🎯 Best Bowling</div>
+                <div class="stat-label">Best Bowling</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value">{int(df["matches"].max())}</div>
                 <div class="stat-name">{df.loc[df["matches"].idxmax(),"player"]}</div>
-                <div class="stat-label">📅 Most Matches</div>
+                <div class="stat-label">Most Matches</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
