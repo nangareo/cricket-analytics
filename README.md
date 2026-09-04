@@ -1,7 +1,43 @@
 # Cricket Analytics
 
-IPL analytics dashboard built on Cricsheet ball-by-ball data (2008–2026).
-Streamlit front end, pandas scoring pipeline, Jenkins → Docker Hub → EC2 deploy.
+[![CI](https://github.com/nangareo/cricket-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/nangareo/cricket-analytics/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+IPL analytics dashboard over Cricsheet ball-by-ball data — 1,243 matches and
+~296,000 deliveries, 2008 to 2026. Streamlit front end, pandas scoring
+pipeline, Jenkins → Docker Hub → EC2 deploy.
+
+![Batting rankings](docs/screenshots/01-batting-dark.png)
+
+<details>
+<summary>More screens</summary>
+
+**Season trends** — scoring across 19 seasons
+
+![Season trends](docs/screenshots/02-season-trends-dark.png)
+
+**Light theme** — the same page, one toggle
+
+![Light theme](docs/screenshots/04-batting-light.png)
+
+</details>
+
+## What was wrong with it
+
+Worth reading if you use Cricsheet data. csv2 writes "no wicket" as a quoted
+empty string, and a `line.split(",")` parser hands that back as the string
+`'""'` rather than `NA`. `.notna()` is then true on every delivery, so:
+
+| | was | should be |
+|---|---|---|
+| V Kohli batting average | 0.40 | **40.5** |
+| SL Malinga wickets | 534 | **170** |
+| Bowling strike rate | 1.00 for all 203 bowlers | a real number |
+| Top fielder | B Kumar, a bowler | **MS Dhoni** |
+
+Batting "average" was strike rate ÷ 100. Bowling "wickets" counted balls
+bowled. Catches were credited to the bowler because the fielder columns were
+never read. One defect, four broken leaderboards — all now covered by tests.
 
 ## Quick start
 
