@@ -1,6 +1,18 @@
+# Streamlit's own chrome. The dashboard's palette lives in dashboard/theme.py
+# and is applied over the top via CSS custom properties, which is what makes
+# the in-app dark/light toggle work. These values only need to match the
+# default (dark) theme so there is no flash before the stylesheet lands.
 [theme]
-primaryColor = "#2ecc71"
-backgroundColor = "#0e1117"
-secondaryBackgroundColor = "#1a1a2e"
-textColor = "#ffffff"
-font = "sans serif"
+primaryColor            = "#7C8693"   # neutral: the UI carries no hue
+backgroundColor         = "#0E1116"
+secondaryBackgroundColor = "#151A21"
+textColor               = "#E8EDF4"
+font                    = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+# Streamlit posts usage analytics to api.segment.io on every page load.
+# Nothing here needs to leave the machine, so it is off.
+gatherUsageStats = false

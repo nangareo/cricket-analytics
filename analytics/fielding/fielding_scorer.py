@@ -3,63 +3,81 @@
 # Cricket Analytics DevOps Project
 # ============================================
 
-import pandas as pd
 import os
 import sys
 import warnings
+
+import pandas as pd
+
 warnings.filterwarnings('ignore')
 
 sys.path.append(os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__)))))
 
-from ingestion.data_loader import load_filtered_data, get_filter_summary
+from ingestion.data_loader import (get_filter_summary, load_filtered_data,
+                                   normalize, player_match_counts)
 import config
+
+
+def _credit_fielders(df, wicket_type):
+    """
+    Count dismissals of one type per fielder.
+
+    csv2 records who took the catch or effected the run out in fielder_1 /
+    fielder_2 — a run out often involves two players and both get credit.
+    Grouping on 'bowler' instead, as this script used to, hands every catch
+    to whoever was bowling.
+    """
+    rows = df[df['wicket_type'] == wicket_type]
+    if rows.empty:
+        return pd.DataFrame(columns=['player', 'count'])
+
+    fielders = pd.concat(
+        [rows['fielder_1'], rows['fielder_2']], ignore_index=True
+    ).dropna()
+    if fielders.empty:
+        return pd.DataFrame(columns=['player', 'count'])
+
+    return (
+        fielders.value_counts()
+        .rename_axis('player').reset_index(name='count')
+    )
+
 
 def calculate_fielding_scores(df):
     print("\n⚙️  Calculating fielding scores...")
 
-    # ---- All players who batted (to get match counts) ----
-    matches_played = df.groupby(
-        'striker')['match_id'].nunique().reset_index()
-    matches_played.columns = ['player', 'matches']
+    # Every player who appeared in any role, so specialist bowlers and
+    # fielders are not dropped for never having batted.
+    fielding = player_match_counts(df)
 
-    # ---- CATCHES ----
-    # When wicket_type is 'caught', bowler's team fielded
-    # We use bowling_team as proxy for fielding
-    catches = df[df['wicket_type'] == 'caught']
-    catch_counts = catches.groupby(
-        'bowler')['match_id'].count().reset_index()
-    catch_counts.columns = ['player', 'catches']
+    # ---- CATCHES ---- credited to the fielder who took it
+    catches = _credit_fielders(df, 'caught').rename(
+        columns={'count': 'catches'})
 
-    # ---- RUN OUTS ----
-    runouts = df[df['wicket_type'] == 'run out']
-    runout_counts = runouts.groupby(
-        'bowler')['match_id'].count().reset_index()
-    runout_counts.columns = ['player', 'run_outs']
+    # ---- RUN OUTS ---- credited to the fielder(s) involved
+    runouts = _credit_fielders(df, 'run out').rename(
+        columns={'count': 'run_outs'})
 
-    # ---- BOWLED (direct wicket credit) ----
-    bowled = df[df['wicket_type'] == 'bowled']
-    bowled_counts = bowled.groupby(
-        'bowler')['match_id'].count().reset_index()
-    bowled_counts.columns = ['player', 'bowled_wickets']
+    # ---- BOWLED ---- the one credit that genuinely belongs to the bowler
+    bowled = (
+        df[df['wicket_type'] == 'bowled']
+        .groupby('bowler').size()
+        .rename('bowled_wickets').rename_axis('player').reset_index()
+    )
 
-    # ---- Combine all fielding stats ----
-    fielding = catch_counts.merge(
-        runout_counts,  on='player', how='outer'
-    ).merge(
-        bowled_counts,  on='player', how='outer'
-    ).merge(
-        matches_played, on='player', how='left'
-    ).fillna(0)
+    for part in (catches, runouts, bowled):
+        fielding = fielding.merge(part, on='player', how='left')
 
-    # ---- Total fielding contributions ----
+    for col in ['catches', 'run_outs', 'bowled_wickets']:
+        fielding[col] = fielding[col].fillna(0).astype('int64')
+
     fielding['total_contributions'] = (
         fielding['catches'] +
         fielding['run_outs'] +
         fielding['bowled_wickets']
     )
 
-    # ---- Contributions per match ----
     fielding['contributions_per_match'] = (
         fielding['total_contributions'] /
         fielding['matches'].replace(0, 1)
@@ -67,16 +85,12 @@ def calculate_fielding_scores(df):
 
     return fielding
 
-def calculate_final_score(fielding):
+
+def calculate_final_score(fielding, min_matches=None):
     print("🧮 Calculating final fielding scores...")
 
-    def normalize(series):
-        min_val = series.min()
-        max_val = series.max()
-        if max_val == min_val:
-            return series * 0
-        return ((series - min_val) /
-                (max_val - min_val) * 100).round(2)
+    min_matches = config.MIN_MATCHES if min_matches is None else min_matches
+    fielding = fielding[fielding['matches'] >= min_matches].copy()
 
     fielding['catch_score']  = normalize(fielding['catches'])
     fielding['runout_score'] = normalize(fielding['run_outs'])
@@ -91,11 +105,9 @@ def calculate_final_score(fielding):
 
     return fielding
 
+
 def show_results(fielding):
-    qualified = fielding[
-        fielding['matches'] >= config.MIN_MATCHES
-    ].copy()
-    qualified = qualified.sort_values(
+    qualified = fielding.sort_values(
         'fielding_score', ascending=False
     ).reset_index(drop=True)
     qualified.index += 1
@@ -118,6 +130,7 @@ def show_results(fielding):
     output_path = "analytics/fielding/fielding_scores.csv"
     qualified[display_cols].to_csv(output_path, index=True)
     print(f"\n💾 Saved to: {output_path}")
+
 
 if __name__ == "__main__":
     print("=" * 70)

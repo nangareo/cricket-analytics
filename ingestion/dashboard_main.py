@@ -1372,7 +1372,7 @@ st.markdown("""
 with tab9:
     import urllib.request as _ur, json as _json
 
-    API_KEY = "c83bbc46-e3c7-4a77-8b28-a9e4d7785183"
+    API_KEY = config.get_cricapi_key()
 
     # ── CSS ──
     st.markdown("""

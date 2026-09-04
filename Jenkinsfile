@@ -35,12 +35,23 @@ pipeline {
 
         stage('Test') {
             steps {
-                echo '✅ Running basic smoke test on image...'
+                echo '✅ Running smoke test on image...'
                 sh """
                     docker run --rm \
                       --entrypoint python \
                       ${IMAGE_TAG} \
                       -c "import streamlit, pandas, plotly; print('Imports OK')"
+                """
+
+                echo '🧪 Running unit tests (parser + scorer maths)...'
+                // tests/ is excluded from the runtime image, so mount the
+                // workspace and run them against the image's interpreter.
+                sh """
+                    docker run --rm \
+                      --entrypoint sh \
+                      -v "\$WORKSPACE":/src -w /src \
+                      ${IMAGE_TAG} \
+                      -c "pip install --no-cache-dir --quiet pytest==8.4.2 && python -m pytest tests -q"
                 """
             }
         }
@@ -65,15 +76,23 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo '🚀 Deploying new container...'
-                sh """
-                    docker pull ${IMAGE_TAG}
-                    docker stop ${CONTAINER_NAME} || true
-                    docker rm ${CONTAINER_NAME} || true
-                    docker run -d --name ${CONTAINER_NAME} --restart always \
-                        -p ${PORT}:${PORT} \
-                        -v /home/ubuntu/cricket-data:/app/data \
-                        ${IMAGE_TAG}
-                """
+                // The CricketData.org key is injected at runtime. It used to be
+                // hardcoded in five source files in this public repo.
+                withCredentials([string(
+                    credentialsId: 'cricapi-key',
+                    variable: 'CRICAPI_KEY'
+                )]) {
+                    sh """
+                        docker pull ${IMAGE_TAG}
+                        docker stop ${CONTAINER_NAME} || true
+                        docker rm ${CONTAINER_NAME} || true
+                        docker run -d --name ${CONTAINER_NAME} --restart always \
+                            -p ${PORT}:${PORT} \
+                            -v /home/ubuntu/cricket-data:/app/data \
+                            -e CRICAPI_KEY="\$CRICAPI_KEY" \
+                            ${IMAGE_TAG}
+                    """
+                }
             }
         }
 

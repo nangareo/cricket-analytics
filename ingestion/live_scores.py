@@ -4,10 +4,16 @@ File: ingestion/live_scores.py
 """
 
 import json
+import os
+import sys
 import urllib.request
 import urllib.error
 
-API_KEY = "c83bbc46-e3c7-4a77-8b28-a9e4d7785183"
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import config
+
+API_KEY = config.get_cricapi_key()
 BASE_URL = "https://api.cricapi.com/v1"
 
 def get_current_matches():

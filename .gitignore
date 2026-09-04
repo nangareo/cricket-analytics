@@ -1,5 +1,16 @@
 cricket-key.pem
 
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Secrets — never commit real keys
+.env
+.streamlit/secrets.toml
+
 # Playwright
 node_modules/
 /test-results/
@@ -7,4 +18,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
-.env 
+
+# Local tooling artifacts
+.playwright-mcp/

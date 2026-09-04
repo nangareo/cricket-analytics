@@ -2,8 +2,32 @@
 # CRICKET ANALYTICS - CENTRAL CONFIG FILE
 # ============================================
 
+import os
+
 # ---- DATA PATH ----
 DATA_FOLDER = "data/raw"
+
+
+# ---- LIVE SCORES API ----
+def get_cricapi_key():
+    """
+    CricketData.org key used by the Live Scores tab.
+
+    Resolved from the CRICAPI_KEY environment variable, falling back to
+    .streamlit/secrets.toml when running under Streamlit.
+
+    Never hardcode the key here. This repository is public, so any key
+    committed to it must be treated as burned and rotated.
+    """
+    key = os.environ.get("CRICAPI_KEY", "").strip()
+    if key:
+        return key
+    try:
+        import streamlit as st
+
+        return str(st.secrets.get("CRICAPI_KEY", "")).strip()
+    except Exception:
+        return ""
 
 # ---- MINIMUM MATCHES ----
 MIN_MATCHES = 20

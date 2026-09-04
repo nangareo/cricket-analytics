@@ -8,7 +8,7 @@ LIVE_TAB_CODE = '''
 with tab9:
     import urllib.request, json, time
 
-    API_KEY = "c83bbc46-e3c7-4a77-8b28-a9e4d7785183"
+    API_KEY = config.get_cricapi_key()
 
     st.markdown("""
     <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">

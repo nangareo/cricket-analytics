@@ -1,0 +1,819 @@
+player,team,last_season,first_season,matches
+A Flintoff,Chennai Super Kings,2009,2009,3
+A Kamboj,Chennai Super Kings,2026,2024,25
+A Mhatre,Chennai Super Kings,2026,2025,13
+AJ Hosein,Chennai Super Kings,2026,2023,8
+AT Rayudu,Chennai Super Kings,2023,2010,194
+B Aparajith,Chennai Super Kings,2015,2015,1
+BA Stokes,Chennai Super Kings,2023,2017,45
+BW Hilfenhaus,Chennai Super Kings,2014,2012,17
+C Ganapathy,Chennai Super Kings,2010,2010,1
+CK Kapugedera,Chennai Super Kings,2008,2008,4
+D Brevis,Chennai Super Kings,2026,2022,28
+D Pretorius,Chennai Super Kings,2023,2022,7
+DE Bollinger,Chennai Super Kings,2012,2010,27
+DJ Bravo,Chennai Super Kings,2022,2008,160
+DJ Hooda,Chennai Super Kings,2025,2015,114
+DJ Hussey,Chennai Super Kings,2014,2008,63
+DJ Mitchell,Chennai Super Kings,2024,2022,15
+DP Conway,Chennai Super Kings,2025,2022,28
+DP Nannes,Chennai Super Kings,2013,2009,29
+DR Shorey,Chennai Super Kings,2019,2018,8
+Gurjapneet Singh,Chennai Super Kings,2026,2026,8
+IC Pandey,Chennai Super Kings,2015,2013,24
+Imran Tahir,Chennai Super Kings,2021,2014,59
+J Overton,Chennai Super Kings,2026,2025,13
+JM Kemp,Chennai Super Kings,2010,2010,5
+Joginder Sharma,Chennai Super Kings,2011,2008,16
+KK Ahmed,Chennai Super Kings,2026,2018,76
+KMDN Kulasekara,Chennai Super Kings,2012,2011,5
+Kartik Sharma,Chennai Super Kings,2026,2026,11
+M Manhas,Chennai Super Kings,2014,2008,41
+M Ntini,Chennai Super Kings,2008,2008,9
+M Vijay,Chennai Super Kings,2020,2009,106
+MEK Hussey,Chennai Super Kings,2015,2008,58
+MJ Henry,Chennai Super Kings,2026,2017,9
+ML Hayden,Chennai Super Kings,2010,2008,32
+MS Dhoni,Chennai Super Kings,2025,2008,265
+MW Short,Chennai Super Kings,2026,2023,10
+Monu Kumar,Chennai Super Kings,2020,2020,1
+Mukesh Choudhary,Chennai Super Kings,2026,2022,24
+NT Ellis,Chennai Super Kings,2025,2021,18
+Noor Ahmad,Chennai Super Kings,2026,2023,51
+P Amarnath,Chennai Super Kings,2008,2008,6
+PH Solanki,Chennai Super Kings,2022,2022,2
+PR Veer,Chennai Super Kings,2026,2026,6
+R Ashwin,Chennai Super Kings,2025,2009,219
+R Ravindra,Chennai Super Kings,2025,2024,18
+RA Tripathi,Chennai Super Kings,2025,2017,99
+RD Chahar,Chennai Super Kings,2026,2017,80
+RD Gaikwad,Chennai Super Kings,2026,2020,85
+RG More,Chennai Super Kings,2015,2015,2
+RS Ghosh,Chennai Super Kings,2026,2026,1
+RS Hangargekar,Chennai Super Kings,2023,2023,2
+RV Uthappa,Chennai Super Kings,2022,2008,200
+S Badrinath,Chennai Super Kings,2013,2008,73
+S Dube,Chennai Super Kings,2026,2019,88
+S Randiv,Chennai Super Kings,2011,2011,8
+S Tyagi,Chennai Super Kings,2010,2009,14
+S Vidyut,Chennai Super Kings,2008,2008,8
+SB Styris,Chennai Super Kings,2011,2008,12
+SC Kuggeleijn,Chennai Super Kings,2019,2019,2
+SH Johnson,Chennai Super Kings,2026,2024,12
+SK Raina,Chennai Super Kings,2021,2008,201
+SK Rasheed,Chennai Super Kings,2025,2023,6
+SM Curran,Chennai Super Kings,2025,2019,64
+SN Khan,Chennai Super Kings,2026,2015,50
+SP Fleming,Chennai Super Kings,2008,2008,10
+SR Watson,Chennai Super Kings,2020,2008,145
+SSB Magala,Chennai Super Kings,2023,2023,2
+SV Samson,Chennai Super Kings,2026,2013,190
+Subhransu Senapati,Chennai Super Kings,2023,2023,1
+T Thushara,Chennai Super Kings,2010,2009,6
+Urvil Patel,Chennai Super Kings,2026,2025,10
+V Shankar,Chennai Super Kings,2025,2014,77
+VY Mahesh,Chennai Super Kings,2012,2008,17
+AA Bilakhia,Deccan Chargers,2010,2009,7
+AA Jhunjhunwala,Deccan Chargers,2012,2010,21
+AS Yadav,Deccan Chargers,2008,2008,6
+Anirudh Singh,Deccan Chargers,2010,2010,5
+B Sumanth,Deccan Chargers,2010,2010,5
+D Kalyankrishna,Deccan Chargers,2008,2008,3
+DJ Harris,Deccan Chargers,2012,2012,6
+DNT Zoysa,Deccan Chargers,2008,2008,3
+DP Vijaykumar,Deccan Chargers,2008,2008,9
+FH Edwards,Deccan Chargers,2009,2009,6
+H Das,Deccan Chargers,2008,2008,1
+I Malhotra,Deccan Chargers,2011,2011,1
+Jaskaran Singh,Deccan Chargers,2010,2009,8
+KAJ Roach,Deccan Chargers,2010,2010,2
+KH Devdhar,Deccan Chargers,2011,2011,1
+LPC Silva,Deccan Chargers,2008,2008,3
+MJ Lumb,Deccan Chargers,2011,2010,12
+PM Sarvesh Kumar,Deccan Chargers,2008,2008,2
+S Sohal,Deccan Chargers,2011,2008,20
+Shahid Afridi,Deccan Chargers,2008,2008,10
+Shoaib Ahmed,Deccan Chargers,2009,2009,7
+T Mishra,Deccan Chargers,2012,2012,1
+TP Sudhindra,Deccan Chargers,2012,2012,3
+V Pratap Singh,Deccan Chargers,2012,2012,9
+WPUJC Vaas,Deccan Chargers,2010,2008,13
+AB Agarkar,Delhi Capitals,2013,2008,42
+AD Mathews,Delhi Capitals,2017,2009,46
+AM Salvi,Delhi Capitals,2011,2009,7
+AR Bawne,Delhi Capitals,2017,2017,1
+AR Patel,Delhi Capitals,2026,2013,179
+AT Carey,Delhi Capitals,2020,2020,3
+Abishek Porel,Delhi Capitals,2026,2023,33
+Aman Hakim Khan,Delhi Capitals,2023,2022,11
+Ashutosh Sharma,Delhi Capitals,2026,2024,28
+Auqib Nabi,Delhi Capitals,2026,2026,5
+B Chipli,Delhi Capitals,2013,2008,22
+B Geeves,Delhi Capitals,2008,2008,2
+BJ Rohrer,Delhi Capitals,2013,2013,8
+BMAJ Mendis,Delhi Capitals,2013,2013,3
+C Munro,Delhi Capitals,2019,2016,13
+CA Ingram,Delhi Capitals,2019,2011,15
+CJ Dala,Delhi Capitals,2018,2018,1
+CM Gautam,Delhi Capitals,2015,2013,13
+CR Woakes,Delhi Capitals,2021,2017,21
+DA Miller,Delhi Capitals,2026,2012,153
+DA Warner,Delhi Capitals,2024,2009,185
+DAJ Bracewell,Delhi Capitals,2012,2012,1
+DJ Muthuswami,Delhi Capitals,2015,2015,6
+DPMD Jayawardene,Delhi Capitals,2013,2008,80
+F du Plessis,Delhi Capitals,2025,2011,151
+G Gambhir,Delhi Capitals,2018,2008,152
+GD McGrath,Delhi Capitals,2008,2008,14
+GH Vihari,Delhi Capitals,2019,2013,23
+GS Sandhu,Delhi Capitals,2015,2015,2
+Gulbadin Naib,Delhi Capitals,2024,2024,2
+J Fraser-McGurk,Delhi Capitals,2025,2024,16
+JA Richardson,Delhi Capitals,2024,2021,4
+JR Hopes,Delhi Capitals,2011,2008,20
+KA Jamieson,Delhi Capitals,2026,2021,15
+KK Nair,Delhi Capitals,2026,2013,87
+KL Nagarkoti,Delhi Capitals,2022,2020,16
+KL Rahul,Delhi Capitals,2026,2013,155
+KMA Paul,Delhi Capitals,2020,2019,9
+Kuldeep Yadav,Delhi Capitals,2026,2016,110
+L Ngidi,Delhi Capitals,2026,2018,27
+LB Williams,Delhi Capitals,2024,2024,2
+LE Plunkett,Delhi Capitals,2018,2018,7
+LI Meriwala,Delhi Capitals,2021,2021,1
+LR Shukla,Delhi Capitals,2014,2008,46
+LRPL Taylor,Delhi Capitals,2014,2008,55
+Lalit Yadav,Delhi Capitals,2024,2020,28
+M Tiwari,Delhi Capitals,2026,2025,5
+MA Starc,Delhi Capitals,2026,2014,57
+MC Juneja,Delhi Capitals,2013,2013,7
+MF Maharoof,Delhi Capitals,2010,2008,20
+MM Sharma,Delhi Capitals,2025,2013,120
+MN Samuels,Delhi Capitals,2017,2012,15
+Mohammad Asif,Delhi Capitals,2008,2008,8
+Mukesh Kumar,Delhi Capitals,2026,2023,42
+Mustafizur Rahman,Delhi Capitals,2025,2016,60
+N Rana,Delhi Capitals,2026,2016,126
+NV Ojha,Delhi Capitals,2018,2009,101
+P Nissanka,Delhi Capitals,2026,2026,10
+PD Collingwood,Delhi Capitals,2010,2010,8
+PK Garg,Delhi Capitals,2023,2020,22
+PP Shaw,Delhi Capitals,2024,2018,79
+PVD Chameera,Delhi Capitals,2026,2022,20
+R Sharma,Delhi Capitals,2014,2010,44
+R Shukla,Delhi Capitals,2014,2012,8
+RE van der Merwe,Delhi Capitals,2013,2009,21
+RK Bhui,Delhi Capitals,2024,2018,4
+RV Patel,Delhi Capitals,2023,2021,9
+S Lamichhane,Delhi Capitals,2019,2018,9
+S Sriram,Delhi Capitals,2011,2010,2
+SD Hope,Delhi Capitals,2024,2024,9
+SPD Smith,Delhi Capitals,2021,2012,102
+SU Parakh,Delhi Capitals,2026,2026,4
+Sameer Rizvi,Delhi Capitals,2026,2024,22
+Sediqullah Atal,Delhi Capitals,2025,2025,1
+Shoaib Malik,Delhi Capitals,2008,2008,8
+Sumit Kumar,Delhi Capitals,2024,2024,4
+Sunny Gupta,Delhi Capitals,2012,2012,1
+T Natarajan,Delhi Capitals,2026,2017,73
+T Stubbs,Delhi Capitals,2026,2022,45
+T Vijay,Delhi Capitals,2026,2025,2
+TK Curran,Delhi Capitals,2021,2018,13
+TR Birt,Delhi Capitals,2011,2011,5
+V Nigam,Delhi Capitals,2026,2025,19
+Y Nagar,Delhi Capitals,2012,2009,23
+YV Dhull,Delhi Capitals,2023,2023,5
+Z Khan,Delhi Capitals,2017,2008,99
+Ankit Soni,Gujarat Lions,2017,2017,6
+DR Smith,Gujarat Lions,2017,2008,91
+ER Dwivedi,Gujarat Lions,2016,2016,3
+IK Pathan,Gujarat Lions,2017,2008,102
+JP Faulkner,Gujarat Lions,2017,2011,60
+MM Patel,Gujarat Lions,2017,2008,63
+MS Gony,Gujarat Lions,2017,2008,44
+NB Singh,Gujarat Lions,2017,2017,2
+P Kumar,Gujarat Lions,2017,2008,119
+PV Tambe,Gujarat Lions,2016,2013,33
+S Kaushik,Gujarat Lions,2017,2016,10
+S Ladda,Gujarat Lions,2016,2010,9
+SB Jakati,Gujarat Lions,2017,2009,58
+SS Agarwal,Gujarat Lions,2017,2017,1
+Tejas Baroka,Gujarat Lions,2017,2017,1
+Arshad Khan,Gujarat Titans,2026,2023,25
+Ashok Sharma,Gujarat Titans,2026,2025,7
+B Sai Sudharsan,Gujarat Titans,2026,2022,57
+BKG Mendis,Gujarat Titans,2025,2025,1
+BR Sharath,Gujarat Titans,2024,2024,1
+DG Nalkande,Gujarat Titans,2024,2022,6
+G Coetzee,Gujarat Titans,2025,2024,14
+GD Phillips,Gujarat Titans,2026,2021,15
+I Sharma,Gujarat Titans,2025,2008,117
+J Little,Gujarat Titans,2024,2023,11
+J Yadav,Gujarat Titans,2023,2015,22
+JC Buttler,Gujarat Titans,2026,2016,137
+JO Holder,Gujarat Titans,2026,2013,57
+K Khejroliya,Gujarat Titans,2026,2018,9
+K Rabada,Gujarat Titans,2026,2017,101
+KS Bharat,Gujarat Titans,2023,2021,10
+KS Williamson,Gujarat Titans,2024,2015,78
+Karim Janat,Gujarat Titans,2025,2025,1
+Kumar Kushagra,Gujarat Titans,2026,2024,4
+M Prasidh Krishna,Gujarat Titans,2026,2018,78
+M Shahrukh Khan,Gujarat Titans,2026,2021,57
+MJ Suthar,Gujarat Titans,2026,2024,4
+MK Lomror,Gujarat Titans,2025,2018,41
+MS Wade,Gujarat Titans,2024,2011,14
+Mohammed Siraj,Gujarat Titans,2026,2017,125
+N Sindhu,Gujarat Titans,2026,2026,6
+PJ Sangwan,Gujarat Titans,2022,2008,43
+R Sai Kishore,Gujarat Titans,2026,2022,27
+R Tewatia,Gujarat Titans,2026,2014,118
+Rashid Khan,Gujarat Titans,2026,2017,153
+S Sandeep Warrier,Gujarat Titans,2024,2019,10
+Shivam Mavi,Gujarat Titans,2023,2018,34
+Shubman Gill,Gujarat Titans,2026,2018,132
+UT Yadav,Gujarat Titans,2024,2010,147
+VR Aaron,Gujarat Titans,2022,2011,50
+WP Saha,Gujarat Titans,2024,2008,157
+Washington Sundar,Gujarat Titans,2026,2017,81
+B Akhil,Kochi Tuskers Kerala,2011,2008,15
+M Klinger,Kochi Tuskers Kerala,2011,2011,4
+P Prasanth,Kochi Tuskers Kerala,2011,2011,1
+VVS Laxman,Kochi Tuskers Kerala,2011,2008,20
+Y Gnaneswara Rao,Kochi Tuskers Kerala,2011,2011,2
+A Chopra,Kolkata Knight Riders,2009,2008,7
+A Raghuvanshi,Kolkata Knight Riders,2026,2024,31
+A Tomar,Kolkata Knight Riders,2022,2022,1
+AD Russell,Kolkata Knight Riders,2025,2012,136
+AJ Finch,Kolkata Knight Riders,2022,2010,90
+AM Rahane,Kolkata Knight Riders,2026,2008,202
+AN Ghosh,Kolkata Knight Riders,2009,2009,2
+AS Roy,Kolkata Knight Riders,2026,2019,31
+Azhar Mahmood,Kolkata Knight Riders,2015,2012,23
+B Indrajith,Kolkata Knight Riders,2022,2022,3
+B Lee,Kolkata Knight Riders,2013,2008,38
+B Muzarabani,Kolkata Knight Riders,2026,2026,2
+BJ Haddin,Kolkata Knight Riders,2011,2011,1
+C Green,Kolkata Knight Riders,2026,2023,43
+C Sakariya,Kolkata Knight Riders,2025,2021,20
+CJ Green,Kolkata Knight Riders,2020,2020,2
+CR Brathwaite,Kolkata Knight Riders,2019,2016,17
+CV Varun,Kolkata Knight Riders,2026,2019,94
+D Wiese,Kolkata Knight Riders,2023,2015,19
+DB Das,Kolkata Knight Riders,2013,2008,24
+DM Bravo,Kolkata Knight Riders,2017,2017,1
+EJG Morgan,Kolkata Knight Riders,2021,2010,78
+FH Allen,Kolkata Knight Riders,2026,2026,11
+GB Hogg,Kolkata Knight Riders,2016,2012,21
+HF Gurney,Kolkata Knight Riders,2019,2019,8
+Harbhajan Singh,Kolkata Knight Riders,2021,2008,163
+Harshit Rana,Kolkata Knight Riders,2025,2022,32
+IR Jaggi,Kolkata Knight Riders,2017,2011,7
+J Botha,Kolkata Knight Riders,2015,2009,34
+JH Kallis,Kolkata Knight Riders,2014,2008,98
+JJ Roy,Kolkata Knight Riders,2023,2017,21
+JL Denly,Kolkata Knight Riders,2019,2019,1
+JPR Scantlebury-Searles,Kolkata Knight Riders,2018,2018,4
+JW Hastings,Kolkata Knight Riders,2016,2014,3
+KC Cariappa,Kolkata Knight Riders,2019,2015,11
+Kartik Tyagi,Kolkata Knight Riders,2026,2020,33
+Liton Das,Kolkata Knight Riders,2023,2023,1
+M Morkel,Kolkata Knight Riders,2016,2009,70
+M Pathirana,Kolkata Knight Riders,2026,2022,33
+MB Parmar,Kolkata Knight Riders,2010,2010,1
+MG Johnson,Kolkata Knight Riders,2018,2013,54
+MK Pandey,Kolkata Knight Riders,2026,2008,170
+MM Ali,Kolkata Knight Riders,2025,2018,72
+MN van Wyk,Kolkata Knight Riders,2009,2009,5
+MV Boucher,Kolkata Knight Riders,2011,2008,30
+Mandeep Singh,Kolkata Knight Riders,2023,2010,103
+Mashrafe Mortaza,Kolkata Knight Riders,2009,2009,1
+Mohammad Hafeez,Kolkata Knight Riders,2008,2008,8
+N Jagadeesan,Kolkata Knight Riders,2023,2020,10
+NS Naik,Kolkata Knight Riders,2020,2016,4
+Navdeep Saini,Kolkata Knight Riders,2026,2019,10
+P Dogra,Kolkata Knight Riders,2013,2010,14
+R McLaren,Kolkata Knight Riders,2013,2010,18
+R Powell,Kolkata Knight Riders,2026,2017,39
+R Sathish,Kolkata Knight Riders,2016,2010,31
+R Vinay Kumar,Kolkata Knight Riders,2018,2008,105
+RK Singh,Kolkata Knight Riders,2026,2018,66
+RN ten Doeschate,Kolkata Knight Riders,2015,2011,26
+RS Gavaskar,Kolkata Knight Riders,2010,2010,2
+Rahmanullah Gurbaz,Kolkata Knight Riders,2025,2023,18
+Ramandeep Singh,Kolkata Knight Riders,2026,2022,34
+S Narwal,Kolkata Knight Riders,2013,2010,7
+SB Bangar,Kolkata Knight Riders,2009,2008,11
+SE Bond,Kolkata Knight Riders,2010,2010,8
+SMSM Senanayake,Kolkata Knight Riders,2013,2013,8
+SP Jackson,Kolkata Knight Riders,2022,2017,8
+SP Narine,Kolkata Knight Riders,2026,2012,201
+SR Dubey,Kolkata Knight Riders,2026,2026,4
+SS Sarkar,Kolkata Knight Riders,2009,2009,2
+SS Shaikh,Kolkata Knight Riders,2009,2009,1
+SW Billings,Kolkata Knight Riders,2022,2016,28
+Salman Butt,Kolkata Knight Riders,2008,2008,7
+Shakib Al Hasan,Kolkata Knight Riders,2021,2011,72
+Shoaib Akhtar,Kolkata Knight Riders,2008,2008,3
+T Banton,Kolkata Knight Riders,2020,2020,2
+T Dahiya,Kolkata Knight Riders,2026,2026,2
+T Taibu,Kolkata Knight Riders,2008,2008,3
+TG Southee,Kolkata Knight Riders,2023,2011,54
+TL Seifert,Kolkata Knight Riders,2026,2021,6
+Umar Gul,Kolkata Knight Riders,2008,2008,6
+VG Arora,Kolkata Knight Riders,2026,2022,42
+Y Prithvi Raj,Kolkata Knight Riders,2019,2019,2
+Yashpal Singh,Kolkata Knight Riders,2009,2009,5
+A Badoni,Lucknow Super Giants,2026,2022,60
+A Mishra,Lucknow Super Giants,2024,2008,162
+A Nortje,Lucknow Super Giants,2026,2020,49
+AA Kulkarni,Lucknow Super Giants,2026,2024,4
+AJ Turner,Lucknow Super Giants,2024,2019,6
+AJ Tye,Lucknow Super Giants,2022,2017,30
+AK Markram,Lucknow Super Giants,2026,2021,69
+Abdul Samad,Lucknow Super Giants,2026,2020,65
+Akash Deep,Lucknow Super Giants,2025,2022,14
+Akash Singh,Lucknow Super Giants,2026,2021,12
+Akshat Raghuwanshi,Lucknow Super Giants,2026,2026,2
+Arjun Tendulkar,Lucknow Super Giants,2026,2023,6
+Arshad Khan (2),Lucknow Super Giants,2024,2024,1
+Avesh Khan,Lucknow Super Giants,2026,2017,82
+DR Sams,Lucknow Super Giants,2023,2020,17
+DS Rathi,Lucknow Super Giants,2026,2025,23
+E Lewis,Lucknow Super Giants,2022,2018,27
+GF Linde,Lucknow Super Giants,2026,2026,3
+Himmat Singh,Lucknow Super Giants,2026,2025,7
+JP Inglis,Lucknow Super Giants,2026,2025,16
+K Gowtham,Lucknow Super Giants,2024,2018,41
+KR Mayers,Lucknow Super Giants,2023,2023,13
+KS Sharma,Lucknow Super Giants,2023,2022,3
+M Siddharth,Lucknow Super Giants,2026,2024,9
+M Vohra,Lucknow Super Giants,2023,2013,53
+MA Wood,Lucknow Super Giants,2023,2018,5
+MD Choudhary,Lucknow Super Giants,2026,2026,10
+MP Breetzke,Lucknow Super Giants,2025,2025,1
+MP Yadav,Lucknow Super Giants,2026,2024,10
+MR Marsh,Lucknow Super Giants,2026,2010,68
+Mohammed Shami,Lucknow Super Giants,2026,2013,132
+Mohsin Khan,Lucknow Super Giants,2026,2022,30
+N Pooran,Lucknow Super Giants,2026,2019,103
+Naveen-ul-Haq,Lucknow Super Giants,2024,2023,17
+PN Mankad,Lucknow Super Giants,2023,2022,9
+Prince Yadav,Lucknow Super Giants,2026,2025,20
+RR Pant,Lucknow Super Giants,2026,2016,138
+S Joseph,Lucknow Super Giants,2024,2024,1
+Shahbaz Ahmed,Lucknow Super Giants,2026,2020,60
+W O'Rourke,Lucknow Super Giants,2025,2025,3
+A Dananjaya,Mumbai Indians,2018,2018,1
+A Nel,Mumbai Indians,2008,2008,1
+A Symonds,Mumbai Indians,2011,2008,36
+AC Blizzard,Mumbai Indians,2012,2011,7
+AM Ghazanfar,Mumbai Indians,2026,2026,11
+AP Tare,Mumbai Indians,2018,2010,31
+AV Wankhade,Mumbai Indians,2014,2014,1
+Ashwani Kumar,Mumbai Indians,2026,2025,10
+BB Sran,Mumbai Indians,2019,2015,24
+BCJ Cutting,Mumbai Indians,2019,2014,21
+BR Dunk,Mumbai Indians,2014,2014,4
+Basil Thampi,Mumbai Indians,2022,2017,25
+C Bosch,Mumbai Indians,2026,2025,10
+C Madan,Mumbai Indians,2010,2010,1
+C Nanda,Mumbai Indians,2009,2009,3
+CA Lynn,Mumbai Indians,2021,2012,42
+CJ Jordan,Mumbai Indians,2023,2016,36
+CJ McKay,Mumbai Indians,2012,2012,2
+CRD Fernando,Mumbai Indians,2010,2008,10
+D Jansen,Mumbai Indians,2023,2023,1
+DJ Jacobs,Mumbai Indians,2012,2011,7
+DJ Thornely,Mumbai Indians,2008,2008,5
+DL Chahar,Mumbai Indians,2026,2016,103
+DS Kulkarni,Mumbai Indians,2021,2008,92
+DV Malewar,Mumbai Indians,2026,2026,2
+FA Allen,Mumbai Indians,2022,2021,5
+GR Napier,Mumbai Indians,2009,2009,1
+HH Gibbs,Mumbai Indians,2012,2008,36
+HH Pandya,Mumbai Indians,2026,2015,160
+HR Shokeen,Mumbai Indians,2023,2022,13
+JDP Oram,Mumbai Indians,2013,2008,15
+JEC Franklin,Mumbai Indians,2012,2011,19
+JJ Bumrah,Mumbai Indians,2026,2013,158
+JL Pattinson,Mumbai Indians,2020,2020,10
+JM Bairstow,Mumbai Indians,2025,2019,52
+JP Behrendorff,Mumbai Indians,2023,2019,17
+JP Duminy,Mumbai Indians,2018,2009,84
+K Santokie,Mumbai Indians,2014,2014,2
+KA Pollard,Mumbai Indians,2022,2010,185
+KV Sharma,Mumbai Indians,2025,2009,89
+Krish Bhagat,Mumbai Indians,2026,2026,3
+L Ronchi,Mumbai Indians,2009,2008,5
+L Wood,Mumbai Indians,2024,2024,2
+LMP Simmons,Mumbai Indians,2017,2014,29
+M Markande,Mumbai Indians,2026,2018,40
+M de Lange,Mumbai Indians,2015,2012,5
+MA Khote,Mumbai Indians,2008,2008,3
+MJ McClenaghan,Mumbai Indians,2019,2015,56
+MJ Santner,Mumbai Indians,2026,2019,36
+Mayank Rawat,Mumbai Indians,2026,2026,1
+Mohammad Ashraful,Mumbai Indians,2009,2009,1
+Mohammad Nabi,Mumbai Indians,2024,2017,24
+Mujeeb Ur Rahman,Mumbai Indians,2025,2018,20
+Naman Dhir,Mumbai Indians,2026,2024,36
+P Suyal,Mumbai Indians,2015,2013,5
+PP Chawla,Mumbai Indians,2024,2008,192
+PP Ojha,Mumbai Indians,2015,2008,90
+PVSN Raju,Mumbai Indians,2025,2025,2
+Q de Kock,Mumbai Indians,2026,2013,118
+R Goyal,Mumbai Indians,2023,2023,1
+R Minz,Mumbai Indians,2026,2025,4
+R Sanjay Yadav,Mumbai Indians,2022,2022,1
+RA Bawa,Mumbai Indians,2026,2022,10
+RA Shaikh,Mumbai Indians,2009,2009,1
+RD Rickelton,Mumbai Indians,2026,2025,26
+RE Levi,Mumbai Indians,2012,2012,6
+RG Sharma,Mumbai Indians,2026,2008,278
+RJ Gleeson,Mumbai Indians,2025,2024,3
+RJ Peterson,Mumbai Indians,2012,2012,5
+RJW Topley,Mumbai Indians,2025,2023,6
+RP Meredith,Mumbai Indians,2023,2021,18
+RR Raje,Mumbai Indians,2009,2008,10
+RT Ponting,Mumbai Indians,2013,2008,9
+RW Price,Mumbai Indians,2011,2011,1
+Raghu Sharma,Mumbai Indians,2026,2026,5
+S Gopal,Mumbai Indians,2024,2014,51
+SA Yadav,Mumbai Indians,2026,2012,175
+SD Lad,Mumbai Indians,2019,2019,1
+SE Rutherford,Mumbai Indians,2026,2019,28
+SL Malinga,Mumbai Indians,2019,2009,122
+SM Pollock,Mumbai Indians,2008,2008,13
+SN Thakur,Mumbai Indians,2026,2015,112
+SR Tendulkar,Mumbai Indians,2013,2008,78
+SS Tiwary,Mumbai Indians,2021,2008,77
+ST Jayasuriya,Mumbai Indians,2010,2008,30
+SZ Mulani,Mumbai Indians,2024,2024,2
+TA Boult,Mumbai Indians,2026,2015,124
+TS Mills,Mumbai Indians,2022,2017,10
+Tilak Varma,Mumbai Indians,2026,2022,68
+UBT Chand,Mumbai Indians,2016,2011,22
+V Puthur,Mumbai Indians,2025,2025,5
+VS Yeligati,Mumbai Indians,2008,2008,2
+WG Jacks,Mumbai Indians,2026,2024,28
+Yuvraj Singh,Mumbai Indians,2019,2008,129
+AC Thomas,Pune Warriors,2012,2011,15
+AG Murtaza,Pune Warriors,2013,2010,12
+AP Majumdar,Pune Warriors,2012,2012,4
+BAW Mendis,Pune Warriors,2013,2008,10
+CJ Ferguson,Pune Warriors,2012,2011,8
+GC Smith,Pune Warriors,2011,2008,29
+JD Ryder,Pune Warriors,2012,2009,29
+JE Taylor,Pune Warriors,2011,2011,5
+K Upadhyay,Pune Warriors,2013,2012,3
+Kamran Khan,Pune Warriors,2011,2009,9
+LJ Wright,Pune Warriors,2013,2012,7
+M Rawat,Pune Warriors,2013,2008,16
+MD Mishra,Pune Warriors,2012,2010,17
+MJ Clarke,Pune Warriors,2012,2012,6
+NL McCullum,Pune Warriors,2011,2011,3
+RV Gomez,Pune Warriors,2013,2011,13
+SB Wagh,Pune Warriors,2011,2010,8
+SC Ganguly,Pune Warriors,2012,2008,57
+SS Mundhe,Pune Warriors,2011,2011,1
+TD Paine,Pune Warriors,2011,2011,2
+TL Suman,Pune Warriors,2013,2009,43
+UA Birla,Pune Warriors,2013,2013,2
+AB Barath,Punjab Kings,2010,2010,3
+AC Gilchrist,Punjab Kings,2013,2008,80
+AD Mascarenhas,Punjab Kings,2013,2008,13
+Arshdeep Singh,Punjab Kings,2026,2019,95
+Azmatullah Omarzai,Punjab Kings,2026,2024,18
+BA Bhatt,Punjab Kings,2013,2011,15
+BE Hendricks,Punjab Kings,2015,2014,7
+BJ Dwarshuis,Punjab Kings,2026,2026,1
+C Connolly,Punjab Kings,2026,2026,13
+CA Pujara,Punjab Kings,2014,2010,23
+CH Gayle,Punjab Kings,2021,2009,141
+DJ Malan,Punjab Kings,2021,2021,1
+F Behardien,Punjab Kings,2016,2016,3
+GC Viljoen,Punjab Kings,2019,2019,6
+GJ Maxwell,Punjab Kings,2025,2012,141
+Gagandeep Singh,Punjab Kings,2008,2008,4
+Gurnoor Brar,Punjab Kings,2023,2023,1
+HM Amla,Punjab Kings,2017,2016,16
+Harmeet Singh,Punjab Kings,2013,2009,27
+Harpreet Brar,Punjab Kings,2026,2019,49
+Harpreet Singh,Punjab Kings,2024,2011,8
+IC Porel,Punjab Kings,2021,2021,1
+Jalaj S Saxena,Punjab Kings,2021,2021,1
+K Goel,Punjab Kings,2010,2008,20
+KJ Abbott,Punjab Kings,2016,2016,5
+Karanveer Singh,Punjab Kings,2015,2014,9
+L Ablish,Punjab Kings,2011,2010,3
+L Balaji,Punjab Kings,2014,2008,73
+LA Pomersbach,Punjab Kings,2013,2008,18
+LH Ferguson,Punjab Kings,2026,2017,52
+M Jansen,Punjab Kings,2026,2021,47
+M Kartik,Punjab Kings,2014,2008,56
+MC Henriques,Punjab Kings,2021,2009,64
+MG Neser,Punjab Kings,2013,2013,1
+MJ Owen,Punjab Kings,2025,2025,1
+MK Tiwary,Punjab Kings,2018,2008,94
+MP Stoinis,Punjab Kings,2026,2016,119
+Mohit Rathee,Punjab Kings,2023,2023,1
+Musheer Khan,Punjab Kings,2025,2025,1
+N Saini,Punjab Kings,2012,2012,10
+N Wadhera,Punjab Kings,2026,2023,38
+NJ Rimmington,Punjab Kings,2011,2011,1
+OF Smith,Punjab Kings,2022,2022,6
+P Awana,Punjab Kings,2014,2012,33
+P Dubey,Punjab Kings,2026,2020,8
+P Sahu,Punjab Kings,2016,2016,5
+P Simran Singh,Punjab Kings,2026,2019,66
+PBB Rajapaksa,Punjab Kings,2023,2022,13
+PC Valthaty,Punjab Kings,2013,2009,23
+Priyansh Arya,Punjab Kings,2026,2025,31
+R Dhawan,Punjab Kings,2024,2013,41
+RJ Harris,Punjab Kings,2013,2009,37
+RR Bose,Punjab Kings,2009,2009,1
+RR Powar,Punjab Kings,2012,2008,27
+RR Rossouw,Punjab Kings,2024,2014,23
+RR Sarwan,Punjab Kings,2008,2008,4
+RS Sodhi,Punjab Kings,2010,2010,2
+S Dhawan,Punjab Kings,2024,2008,222
+SD Chitnis,Punjab Kings,2012,2008,10
+SE Marsh,Punjab Kings,2017,2008,71
+SJ Srivastava,Punjab Kings,2011,2010,14
+SM Katich,Punjab Kings,2009,2008,11
+SS Cottrell,Punjab Kings,2020,2020,6
+SS Iyer,Punjab Kings,2026,2015,145
+Shashank Singh,Punjab Kings,2026,2022,45
+Shivam Sharma,Punjab Kings,2015,2014,5
+Shivam Singh,Punjab Kings,2024,2024,1
+Sikandar Raza,Punjab Kings,2024,2023,9
+Sunny Singh,Punjab Kings,2011,2011,6
+Suryansh Shedge,Punjab Kings,2026,2025,10
+T Kohli,Punjab Kings,2009,2008,8
+TM Srivastava,Punjab Kings,2009,2008,4
+Tanay Thyagarajan,Punjab Kings,2024,2024,2
+U Kaul,Punjab Kings,2008,2008,3
+V Kaverappa,Punjab Kings,2024,2024,1
+V Sehwag,Punjab Kings,2015,2008,104
+VRV Singh,Punjab Kings,2010,2008,18
+Vijaykumar Vyshak,Punjab Kings,2026,2023,25
+Vishnu Vinod,Punjab Kings,2026,2017,8
+WA Mota,Punjab Kings,2009,2008,11
+XC Bartlett,Punjab Kings,2026,2025,13
+YA Abdulla,Punjab Kings,2010,2009,11
+YS Chahal,Punjab Kings,2026,2013,185
+Yash Thakur,Punjab Kings,2026,2023,22
+A Chandila,Rajasthan Royals,2013,2012,12
+A Singh,Rajasthan Royals,2012,2009,23
+A Uniyal,Rajasthan Royals,2010,2010,2
+AA Chavan,Rajasthan Royals,2013,2011,13
+AC Voges,Rajasthan Royals,2010,2010,8
+AF Milne,Rajasthan Royals,2026,2016,11
+AG Paunikar,Rajasthan Royals,2011,2010,5
+AL Menaria,Rajasthan Royals,2013,2011,26
+AM Nayar,Rajasthan Royals,2014,2008,51
+AP Dole,Rajasthan Royals,2010,2010,3
+AS Rajpoot,Rajasthan Royals,2020,2013,29
+AS Raut,Rajasthan Royals,2011,2009,22
+Abdul Basith,Rajasthan Royals,2023,2023,1
+Akash Madhwal,Rajasthan Royals,2025,2023,17
+Ankit Sharma,Rajasthan Royals,2018,2012,21
+Anureet Singh,Rajasthan Royals,2018,2009,22
+B Laughlin,Rajasthan Royals,2018,2013,9
+BJ Hodge,Rajasthan Royals,2014,2008,64
+Brijesh Sharma,Rajasthan Royals,2026,2026,13
+CH Morris,Rajasthan Royals,2021,2013,81
+D Ferreira,Rajasthan Royals,2026,2023,19
+D Salunkhe,Rajasthan Royals,2008,2008,5
+DH Yagnik,Rajasthan Royals,2014,2011,23
+DJM Short,Rajasthan Royals,2018,2018,7
+DR Martyn,Rajasthan Royals,2010,2010,1
+DS Lehmann,Rajasthan Royals,2008,2008,2
+Dhruv Jurel,Rajasthan Royals,2026,2023,51
+FY Fazal,Rajasthan Royals,2011,2010,14
+Fazalhaq Farooqi,Rajasthan Royals,2025,2022,12
+HE van der Dussen,Rajasthan Royals,2022,2022,3
+Harmeet Singh (2),Rajasthan Royals,2013,2013,1
+IS Sodhi,Rajasthan Royals,2019,2018,8
+J Theron,Rajasthan Royals,2015,2010,10
+JC Archer,Rajasthan Royals,2026,2018,68
+JDS Neesham,Rajasthan Royals,2022,2014,14
+JE Root,Rajasthan Royals,2023,2023,2
+K Kartikeya,Rajasthan Royals,2025,2022,16
+K Yadav,Rajasthan Royals,2023,2021,3
+KA Maharaj,Rajasthan Royals,2024,2024,2
+KK Cooper,Rajasthan Royals,2014,2012,25
+KM Asif,Rajasthan Royals,2023,2018,7
+KR Sen,Rajasthan Royals,2024,2022,12
+KS Rathore,Rajasthan Royals,2025,2025,1
+KT Maphaka,Rajasthan Royals,2025,2024,4
+Kamran Akmal,Rajasthan Royals,2008,2008,6
+LA Carseldine,Rajasthan Royals,2009,2009,5
+LG Pretorius,Rajasthan Royals,2026,2026,2
+M Ashwin,Rajasthan Royals,2023,2016,44
+M Theekshana,Rajasthan Royals,2025,2022,38
+MD Shanaka,Rajasthan Royals,2026,2023,9
+MDKJ Perera,Rajasthan Royals,2013,2013,2
+N Burger,Rajasthan Royals,2026,2024,18
+NA Saini,Rajasthan Royals,2023,2019,28
+ND Doshi,Rajasthan Royals,2011,2010,4
+NK Patel,Rajasthan Royals,2009,2008,5
+NM Coulter-Nile,Rajasthan Royals,2022,2013,38
+Niraj Patel,Rajasthan Royals,2009,2008,6
+O Thomas,Rajasthan Royals,2019,2019,4
+OA Shah,Rajasthan Royals,2013,2010,23
+OC McCoy,Rajasthan Royals,2023,2022,8
+P Chopra,Rajasthan Royals,2019,2018,2
+PR Shah,Rajasthan Royals,2011,2008,15
+PWH de Silva,Rajasthan Royals,2025,2021,37
+Pankaj Singh,Rajasthan Royals,2012,2008,17
+R Dravid,Rajasthan Royals,2013,2008,88
+R Parag,Rajasthan Royals,2026,2019,92
+RA Jadeja,Rajasthan Royals,2026,2008,264
+RJ Quiney,Rajasthan Royals,2009,2009,7
+Ravi Bishnoi,Rajasthan Royals,2026,2020,86
+Ravi Singh,Rajasthan Royals,2026,2026,2
+S Midhun,Rajasthan Royals,2019,2019,1
+S Sreesanth,Rajasthan Royals,2013,2008,44
+SA Asnodkar,Rajasthan Royals,2011,2008,20
+SB Dubey,Rajasthan Royals,2026,2024,17
+SK Trivedi,Rajasthan Royals,2013,2008,76
+SK Warne,Rajasthan Royals,2011,2008,55
+SM Harwood,Rajasthan Royals,2009,2009,3
+SO Hetmyer,Rajasthan Royals,2026,2019,93
+SS Mishra,Rajasthan Royals,2026,2026,2
+STR Binny,Rajasthan Royals,2019,2010,88
+SW Tait,Rajasthan Royals,2013,2010,21
+Sandeep Sharma,Rajasthan Royals,2026,2013,142
+Sohail Tanvir,Rajasthan Royals,2008,2008,11
+T Henderson,Rajasthan Royals,2009,2009,2
+T Kohler-Cadmore,Rajasthan Royals,2024,2024,3
+T Shamsi,Rajasthan Royals,2021,2016,5
+TU Deshpande,Rajasthan Royals,2026,2020,53
+Tanush Kotian,Rajasthan Royals,2024,2024,1
+V Suryavanshi,Rajasthan Royals,2026,2025,23
+VS Malik,Rajasthan Royals,2014,2009,13
+YBK Jaiswal,Rajasthan Royals,2026,2020,82
+Yash Raj Punja,Rajasthan Royals,2026,2026,8
+Younis Khan,Rajasthan Royals,2008,2008,1
+Yudhvir Singh,Rajasthan Royals,2025,2023,9
+AB Dinda,Rising Pune Supergiant,2017,2008,76
+GJ Bailey,Rising Pune Supergiant,2016,2009,39
+JA Morkel,Rising Pune Supergiant,2016,2008,90
+KP Pietersen,Rising Pune Supergiant,2016,2009,36
+NLTC Perera,Rising Pune Supergiant,2016,2010,38
+PSP Handscomb,Rising Pune Supergiant,2016,2016,1
+R Bhatia,Rising Pune Supergiant,2017,2008,95
+RP Singh,Rising Pune Supergiant,2016,2008,82
+SM Boland,Rising Pune Supergiant,2016,2016,2
+UT Khawaja,Rising Pune Supergiant,2016,2016,6
+A Choudhary,Royal Challengers Bengaluru,2017,2017,5
+A Kumble,Royal Challengers Bengaluru,2010,2008,42
+A Mithun,Royal Challengers Bengaluru,2013,2009,16
+A Mukund,Royal Challengers Bengaluru,2013,2008,4
+AA Kazi,Royal Challengers Bengaluru,2011,2011,1
+AA Noffke,Royal Challengers Bengaluru,2008,2008,1
+AB McDonald,Royal Challengers Bengaluru,2013,2009,10
+AB de Villiers,Royal Challengers Bengaluru,2021,2008,179
+AD Nath,Royal Challengers Bengaluru,2019,2016,10
+AN Ahmed,Royal Challengers Bengaluru,2015,2010,17
+AS Joseph,Royal Challengers Bengaluru,2024,2019,22
+AUK Pathan,Royal Challengers Bengaluru,2012,2011,7
+Abdur Razzak,Royal Challengers Bengaluru,2008,2008,1
+Abhinandan Singh,Royal Challengers Bengaluru,2026,2026,3
+Anuj Rawat,Royal Challengers Bengaluru,2024,2021,24
+B Kumar,Royal Challengers Bengaluru,2026,2011,206
+BB McCullum,Royal Challengers Bengaluru,2018,2008,110
+C de Grandhomme,Royal Challengers Bengaluru,2019,2017,25
+CJ Anderson,Royal Challengers Bengaluru,2018,2014,30
+CK Langeveldt,Royal Challengers Bengaluru,2011,2009,7
+D Padikkal,Royal Challengers Bengaluru,2026,2020,90
+D du Preez,Royal Challengers Bengaluru,2009,2009,2
+DJ Willey,Royal Challengers Bengaluru,2023,2018,11
+DJG Sammy,Royal Challengers Bengaluru,2015,2013,22
+DL Vettori,Royal Challengers Bengaluru,2012,2008,34
+DT Christian,Royal Challengers Bengaluru,2021,2011,51
+DT Patil,Royal Challengers Bengaluru,2008,2008,2
+DW Steyn,Royal Challengers Bengaluru,2020,2008,95
+GHS Garton,Royal Challengers Bengaluru,2021,2021,5
+Gurkeerat Singh,Royal Challengers Bengaluru,2020,2012,38
+H Sharma,Royal Challengers Bengaluru,2024,2023,2
+I Udana,Royal Challengers Bengaluru,2020,2020,10
+Iqbal Abdulla,Royal Challengers Bengaluru,2017,2008,48
+J Arunkumar,Royal Challengers Bengaluru,2008,2008,3
+J Syed Mohammad,Royal Challengers Bengaluru,2013,2011,11
+JA Duffy,Royal Challengers Bengaluru,2026,2026,6
+JG Bethell,Royal Challengers Bengaluru,2026,2025,10
+JJ van der Wath,Royal Challengers Bengaluru,2011,2011,3
+JM Cox,Royal Challengers Bengaluru,2026,2026,1
+JM Sharma,Royal Challengers Bengaluru,2026,2022,69
+JR Hazlewood,Royal Challengers Bengaluru,2026,2020,52
+JR Philippe,Royal Challengers Bengaluru,2020,2020,5
+KB Arun Karthik,Royal Challengers Bengaluru,2013,2010,14
+KD Karthik,Royal Challengers Bengaluru,2024,2008,250
+KH Pandya,Royal Challengers Bengaluru,2026,2016,158
+KM Jadhav,Royal Challengers Bengaluru,2023,2010,85
+KP Appanna,Royal Challengers Bengaluru,2012,2009,15
+KW Richardson,Royal Challengers Bengaluru,2021,2013,15
+M Kaif,Royal Challengers Bengaluru,2012,2008,27
+M Muralitharan,Royal Challengers Bengaluru,2014,2008,66
+MA Agarwal,Royal Challengers Bengaluru,2025,2011,128
+MG Bracewell,Royal Challengers Bengaluru,2023,2023,5
+MS Bhandage,Royal Challengers Bengaluru,2025,2025,3
+MS Bisla,Royal Challengers Bengaluru,2015,2010,39
+Mayank Dagar,Royal Challengers Bengaluru,2024,2023,8
+Milind Kumar,Royal Challengers Bengaluru,2019,2019,1
+Misbah-ul-Haq,Royal Challengers Bengaluru,2008,2008,8
+N Thushara,Royal Challengers Bengaluru,2025,2024,8
+NJ Maddinson,Royal Challengers Bengaluru,2015,2014,3
+P Negi,Royal Challengers Bengaluru,2020,2012,49
+P Parameswaran,Royal Challengers Bengaluru,2012,2011,8
+P Ray Barman,Royal Challengers Bengaluru,2019,2019,1
+PA Patel,Royal Challengers Bengaluru,2019,2008,137
+PD Salt,Royal Challengers Bengaluru,2026,2023,40
+Parvez Rasool,Royal Challengers Bengaluru,2016,2013,11
+R Bishnoi,Royal Challengers Bengaluru,2009,2009,3
+R Ninan,Royal Challengers Bengaluru,2011,2011,2
+R Rampaul,Royal Challengers Bengaluru,2014,2013,12
+R Shepherd,Royal Challengers Bengaluru,2026,2022,32
+RM Patidar,Royal Challengers Bengaluru,2026,2021,52
+RR Bhatkal,Royal Challengers Bengaluru,2012,2012,1
+Rasikh Salam,Royal Challengers Bengaluru,2026,2019,25
+S Aravind,Royal Challengers Bengaluru,2017,2011,38
+S Badree,Royal Challengers Bengaluru,2017,2013,12
+S Chanderpaul,Royal Challengers Bengaluru,2008,2008,3
+S Kaul,Royal Challengers Bengaluru,2022,2013,55
+S Rana,Royal Challengers Bengaluru,2014,2011,9
+SB Joshi,Royal Challengers Bengaluru,2008,2008,4
+SS Prabhudessai,Royal Challengers Bengaluru,2024,2022,12
+Sachin Baby,Royal Challengers Bengaluru,2021,2013,14
+Saurav Chauhan,Royal Challengers Bengaluru,2024,2024,3
+Sonu Yadav,Royal Challengers Bengaluru,2023,2023,1
+Suyash Sharma,Royal Challengers Bengaluru,2026,2023,39
+Swapnil Singh,Royal Challengers Bengaluru,2024,2016,14
+TH David,Royal Challengers Bengaluru,2026,2021,61
+TM Dilshan,Royal Challengers Bengaluru,2013,2008,52
+V Kohli,Royal Challengers Bengaluru,2026,2008,278
+VH Zol,Royal Challengers Bengaluru,2014,2014,2
+VR Iyer,Royal Challengers Bengaluru,2026,2021,63
+W Jaffer,Royal Challengers Bengaluru,2009,2008,8
+WD Parnell,Royal Challengers Bengaluru,2023,2011,34
+YV Takawale,Royal Challengers Bengaluru,2014,2008,16
+Yash Dayal,Royal Challengers Bengaluru,2025,2022,43
+A Ashish Reddy,Sunrisers Hyderabad,2016,2012,28
+A Manohar,Sunrisers Hyderabad,2025,2022,24
+A Nehra,Sunrisers Hyderabad,2017,2008,88
+A Zampa,Sunrisers Hyderabad,2025,2016,22
+AD Hales,Sunrisers Hyderabad,2018,2018,6
+AU Rashid,Sunrisers Hyderabad,2023,2021,3
+Abhishek Sharma,Sunrisers Hyderabad,2026,2018,92
+Anand Rajan,Sunrisers Hyderabad,2013,2011,8
+Aniket Verma,Sunrisers Hyderabad,2026,2025,22
+Anmolpreet Singh,Sunrisers Hyderabad,2024,2019,10
+Atharva Taide,Sunrisers Hyderabad,2025,2023,10
+B Stanlake,Sunrisers Hyderabad,2018,2017,6
+BB Samantray,Sunrisers Hyderabad,2013,2012,8
+Bipul Sharma,Sunrisers Hyderabad,2017,2010,30
+CL White,Sunrisers Hyderabad,2013,2008,47
+D Madushanka,Sunrisers Hyderabad,2026,2026,1
+DA Payne,Sunrisers Hyderabad,2026,2026,2
+DB Ravi Teja,Sunrisers Hyderabad,2013,2008,28
+E Malinga,Sunrisers Hyderabad,2026,2025,22
+H Klaasen,Sunrisers Hyderabad,2026,2018,61
+HC Brook,Sunrisers Hyderabad,2023,2023,11
+HV Patel,Sunrisers Hyderabad,2026,2012,122
+Harsh Dubey,Sunrisers Hyderabad,2026,2025,11
+Ishan Kishan,Sunrisers Hyderabad,2026,2016,130
+J Suchith,Sunrisers Hyderabad,2022,2015,28
+JD Unadkat,Sunrisers Hyderabad,2026,2010,115
+KC Sangakkara,Sunrisers Hyderabad,2013,2008,68
+LS Livingstone,Sunrisers Hyderabad,2026,2019,51
+MJ Guptill,Sunrisers Hyderabad,2019,2016,13
+Nithish Kumar Reddy,Sunrisers Hyderabad,2026,2023,42
+PA Reddy,Sunrisers Hyderabad,2013,2012,11
+PHKD Mendis,Sunrisers Hyderabad,2025,2025,5
+PJ Cummins,Sunrisers Hyderabad,2026,2014,80
+PP Hinge,Sunrisers Hyderabad,2026,2026,7
+PWA Mulder,Sunrisers Hyderabad,2025,2025,1
+R Smaran,Sunrisers Hyderabad,2026,2026,5
+RS Bopara,Sunrisers Hyderabad,2015,2009,24
+S Anirudha,Sunrisers Hyderabad,2014,2008,17
+S Arora,Sunrisers Hyderabad,2026,2026,10
+S Nadeem,Sunrisers Hyderabad,2021,2011,71
+SA Abbott,Sunrisers Hyderabad,2022,2015,3
+SP Goswami,Sunrisers Hyderabad,2020,2008,29
+Sakib Hussain,Sunrisers Hyderabad,2026,2026,11
+Salil Arora,Sunrisers Hyderabad,2026,2026,1
+Sanvir Singh,Sunrisers Hyderabad,2024,2023,6
+Shivang Kumar,Sunrisers Hyderabad,2026,2026,13
+Simarjeet Singh,Sunrisers Hyderabad,2025,2022,14
+TM Head,Sunrisers Hyderabad,2026,2016,52
+Umran Malik,Sunrisers Hyderabad,2024,2021,26
+V Viyaskanth,Sunrisers Hyderabad,2024,2024,3
+Virat Singh,Sunrisers Hyderabad,2021,2021,2
+Vivrant Sharma,Sunrisers Hyderabad,2023,2023,2
+X Thalaivan Sargunam,Sunrisers Hyderabad,2013,2013,1
+Y Venugopal Rao,Sunrisers Hyderabad,2014,2008,58
+YK Pathan,Sunrisers Hyderabad,2019,2008,164
+Zeeshan Ansari,Sunrisers Hyderabad,2025,2025,10

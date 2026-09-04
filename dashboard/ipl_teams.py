@@ -2,6 +2,8 @@
 # IPL TEAMS - COMPLETE 2026
 # All 192 Cricsheet aliases resolved
 # ============================================
+import os
+
 
 IPL_TEAMS = {
     "Chennai Super Kings":        {"color":"#F9CD05","secondary":"#0081E9","short":"CSK","emoji":"🟡"},
@@ -14,7 +16,22 @@ IPL_TEAMS = {
     "Punjab Kings":               {"color":"#ED1B24","secondary":"#A7A9AC","short":"PBKS","emoji":"🔴"},
     "Lucknow Super Giants":       {"color":"#00A0E3","secondary":"#FFCC00","short":"LSG","emoji":"🩵"},
     "Gujarat Titans":             {"color":"#1C4F9C","secondary":"#00B4CC","short":"GT", "emoji":"🔵"},
+    # Franchises that no longer exist. Players whose last season was with one
+    # of these still need a colour and a badge, or they render as "Unknown".
+    "Deccan Chargers":            {"color":"#1F3B73","secondary":"#9EA2A6","short":"DC*","emoji":"⚪"},
+    "Pune Warriors":              {"color":"#2E5E9E","secondary":"#86C5E8","short":"PWI","emoji":"🔵"},
+    "Gujarat Lions":              {"color":"#E04E2A","secondary":"#B8860B","short":"GL", "emoji":"🟠"},
+    "Rising Pune Supergiant":     {"color":"#B0288C","secondary":"#3E3E8E","short":"RPS","emoji":"🟣"},
+    "Kochi Tuskers Kerala":       {"color":"#E4711B","secondary":"#4B2E83","short":"KTK","emoji":"🟠"},
 }
+
+# Franchises still competing, in case anything needs to tell them apart.
+ACTIVE_TEAMS = [
+    "Chennai Super Kings", "Mumbai Indians", "Royal Challengers Bengaluru",
+    "Kolkata Knight Riders", "Delhi Capitals", "Sunrisers Hyderabad",
+    "Rajasthan Royals", "Punjab Kings", "Lucknow Super Giants",
+    "Gujarat Titans",
+]
 
 RETIRED_PLAYERS = {
     "SR Tendulkar","SC Ganguly","R Dravid","VVS Laxman","V Sehwag",
@@ -193,23 +210,52 @@ PLAYER_TEAMS = {
 }
 
 
+# ── RESOLVED TEAMS ────────────────────────────────────
+# analytics/player_teams.csv is generated from the ball-by-ball data by
+# analytics/player_teams.py and covers every player who has ever appeared.
+# The hand-written PLAYER_TEAMS dict above is kept only as a fallback for
+# anyone the data cannot place.
+_TEAMS_CSV = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "analytics", "player_teams.csv",
+)
+
+
+def _load_resolved_teams():
+    try:
+        import csv
+        with open(_TEAMS_CSV, newline="", encoding="utf-8") as fh:
+            return {r["player"]: r["team"] for r in csv.DictReader(fh)
+                    if r.get("player") and r.get("team")}
+    except Exception:
+        return {}
+
+
+RESOLVED_TEAMS = _load_resolved_teams()
+
+
+def get_player_team(player_name):
+    """The franchise a player most recently played for, or None."""
+    return RESOLVED_TEAMS.get(player_name) or PLAYER_TEAMS.get(player_name)
+
+
 def is_retired(player_name):
     return player_name in RETIRED_PLAYERS
 
 def get_team_color(player_name):
-    team = PLAYER_TEAMS.get(player_name)
+    team = get_player_team(player_name)
     if team and team in IPL_TEAMS:
         return IPL_TEAMS[team]["color"]
     return "#00d4aa"
 
 def get_team_secondary(player_name):
-    team = PLAYER_TEAMS.get(player_name)
+    team = get_player_team(player_name)
     if team and team in IPL_TEAMS:
         return IPL_TEAMS[team]["secondary"]
     return "#1e2d3d"
 
 def get_team_info(player_name):
-    team = PLAYER_TEAMS.get(player_name)
+    team = get_player_team(player_name)
     if team and team in IPL_TEAMS:
         info = IPL_TEAMS[team].copy()
         info["team_name"] = team

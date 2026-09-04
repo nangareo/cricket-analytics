@@ -1,10 +1,21 @@
 """
 Test CricketData.org API Key
-Run: python test_api.py
-"""
-import urllib.request, json
 
-API_KEY = "c83bbc46-e3c7-4a77-8b28-a9e4d7785183"
+Run: CRICAPI_KEY=your-key python test_api.py
+"""
+import json
+import sys
+import urllib.request
+
+import config
+
+API_KEY = config.get_cricapi_key()
+if not API_KEY:
+    print("No API key found.")
+    print("Set CRICAPI_KEY in the environment, or add it to "
+          ".streamlit/secrets.toml (see .streamlit/secrets.toml.example).")
+    sys.exit(1)
+
 url = f"https://api.cricapi.com/v1/currentMatches?apikey={API_KEY}&offset=0"
 
 print("Testing CricketData.org API...")

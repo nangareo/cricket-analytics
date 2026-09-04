@@ -1,6 +1,8 @@
 import pandas as pd, os, sys
 sys.path.insert(0, os.getcwd())
-from dashboard.ipl_teams import PLAYER_TEAMS, IPL_TEAMS, RETIRED_PLAYERS, get_team_color, get_team_info, avatar_html
+from dashboard.ipl_teams import (PLAYER_TEAMS, IPL_TEAMS, RETIRED_PLAYERS,
+                                 get_team_color, get_team_info, get_player_team,
+                                 avatar_html)
 
 def get_team_players(team_name, scores):
     players = {"batting":[], "bowling":[], "allrounder":[]}
@@ -9,7 +11,7 @@ def get_team_players(team_name, scores):
         df   = scores[dtype].copy()
         pcol = "striker" if "striker" in df.columns else "bowler" if "bowler" in df.columns else "player"
         df   = df.rename(columns={pcol:"player"})
-        players[dtype] = df[df["player"].apply(lambda x: PLAYER_TEAMS.get(x)==team_name and x not in RETIRED_PLAYERS)].sort_values(sc, ascending=False).to_dict("records")
+        players[dtype] = df[df["player"].apply(lambda x: get_player_team(x)==team_name and x not in RETIRED_PLAYERS)].sort_values(sc, ascending=False).to_dict("records")
     return players
 
 def calculate_team_stats(team_name, scores, min_matches=10):
@@ -102,8 +104,8 @@ def get_player_matchups(team1, team2, scores):
     bowl_df = scores["bowling"].copy()
     bpc = "striker" if "striker" in bat_df.columns else "player"
     wpc = "bowler"  if "bowler"  in bowl_df.columns else "player"
-    t1b = bat_df[bat_df[bpc].apply(lambda x: PLAYER_TEAMS.get(x)==team1 and x not in RETIRED_PLAYERS)].sort_values("batting_score",ascending=False).head(5)
-    t2w = bowl_df[bowl_df[wpc].apply(lambda x: PLAYER_TEAMS.get(x)==team2 and x not in RETIRED_PLAYERS)].sort_values("bowling_score",ascending=False).head(5)
+    t1b = bat_df[bat_df[bpc].apply(lambda x: get_player_team(x)==team1 and x not in RETIRED_PLAYERS)].sort_values("batting_score",ascending=False).head(5)
+    t2w = bowl_df[bowl_df[wpc].apply(lambda x: get_player_team(x)==team2 and x not in RETIRED_PLAYERS)].sort_values("bowling_score",ascending=False).head(5)
     for _,bat in t1b.iterrows():
         for _,bowl in t2w.iterrows():
             bn,wn = bat[bpc],bowl[wpc]

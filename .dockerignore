@@ -1,6 +1,22 @@
+# Raw ball-by-ball data is bind-mounted at runtime, not baked into the image.
+# Note: do NOT add a blanket *.csv rule here — analytics/*/*_scores.csv are the
+# dashboard's data source and must ship inside the image.
 data/raw/
+data_backup_old/
+
 __pycache__/
 *.pyc
 *.pyo
+
 .git/
-*.csv
+.venv/
+venv/
+
+tests/
+e2e/
+node_modules/
+playwright-report/
+test-results/
+
+.streamlit/secrets.toml
+*.docx

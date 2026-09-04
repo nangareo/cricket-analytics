@@ -60,9 +60,18 @@ def calculate_allrounder_score(batting, bowling, fielding):
         ]],
         on='player', how='inner'
     ).merge(
-        fielding[['player', 'fielding_score', 'catches', 'run_outs']],
+        fielding[['player', 'fielding_score', 'catches', 'run_outs',
+                  'matches']].rename(columns={'matches': 'matches_all_roles'}),
         on='player', how='left'
     ).fillna(0)
+
+    # 'matches' off the batting sheet only counts games a player batted in,
+    # which reads oddly next to a wicket tally earned across more games.
+    # The fielding sheet counts every appearance, in any role.
+    allrounder['matches'] = (
+        allrounder[['matches', 'matches_all_roles']].max(axis=1).astype('int64')
+    )
+    allrounder = allrounder.drop(columns=['matches_all_roles'])
 
     # ---- ALL-ROUNDER FORMULA ----
     # Batting 45% + Bowling 45% + Fielding 10%

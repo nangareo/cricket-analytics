@@ -14,7 +14,12 @@ COPY . .
 
 EXPOSE 8501
 
-HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health || exit 1
+# python:3.11-slim ships no curl, so probe the health endpoint with the
+# interpreter that is already here. The old curl-based check could never
+# succeed and left every container marked unhealthy.
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+    CMD python -c "import urllib.request, sys; \
+sys.exit(0 if urllib.request.urlopen('http://localhost:8501/_stcore/health', timeout=4).status == 200 else 1)"
 
 ENTRYPOINT ["streamlit", "run", "dashboard/app.py", \
             "--server.port=8501", \
