@@ -7,18 +7,30 @@ IPL analytics dashboard over Cricsheet ball-by-ball data — 1,243 matches and
 ~296,000 deliveries, 2008 to 2026. Streamlit front end, pandas scoring
 pipeline, Jenkins → Docker Hub → EC2 deploy.
 
-![Batting rankings](docs/screenshots/01-batting-dark.png)
+![Batting rankings](docs/screenshots/01-batting.png)
 
 <details>
 <summary>More screens</summary>
 
 **Season trends** — scoring across 19 seasons
 
-![Season trends](docs/screenshots/02-season-trends-dark.png)
+![Season trends](docs/screenshots/02-season-trends.png)
+
+**Team intel** — SWOT and matchups for any pairing
+
+![Team intel](docs/screenshots/03-team-intel.png)
+
+**Best XI** — picked from the scores, with squad composition
+
+![Best XI](docs/screenshots/04-best-xi.png)
+
+**All-rounders** — profile radar and score breakdown
+
+![All-rounders](docs/screenshots/05-allrounders.png)
 
 **Light theme** — the same page, one toggle
 
-![Light theme](docs/screenshots/04-batting-light.png)
+![Light theme](docs/screenshots/06-batting-light.png)
 
 </details>
 
