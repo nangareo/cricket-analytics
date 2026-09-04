@@ -77,6 +77,12 @@ def load_season_data():
 
 scores = load_scores()
 
+def team_dot(info):
+    """The small team-coloured ball used beside a name."""
+    colour = info.get("color", "var(--muted)") if hasattr(info, "get") else info
+    return f'<span class="team-dot" style="background:{colour}"></span>'
+
+
 def _readable_on(hex_color):
     """Black or white text, whichever has more contrast on this background."""
     h = hex_color.lstrip("#")
@@ -488,7 +494,7 @@ with tab3:
                             <span>Bowl</span><span>{w_pct:.0f}</span></div>
                         <div class="progress-bar">
                             <div class="progress-fill"
-                                 style="width:{w_pct}%;background:linear-gradient(90deg,var(--negative),var(--gold))">
+                                 style="width:{w_pct}%;background:var(--accent-mark)">
                             </div>
                         </div>
                     </div>
@@ -519,7 +525,7 @@ with tab3:
                     fillcolor=hex_to_rgba(colors_radar[idx], 0.15)
                 ))
             fig.update_layout(
-                **plotly_dark(),
+                **{**plotly_dark(), "margin": dict(l=70, r=70, t=56, b=40)},
                 polar=dict(
                     bgcolor="rgba(0,0,0,0)",
                     radialaxis=dict(visible=True, range=[0,100],
@@ -533,10 +539,18 @@ with tab3:
             # Stacked bar
             fig2 = px.bar(df, x="player",
                           y=["batting_score","bowling_score","fielding_score"],
-                          title="Score Breakdown",
+                          title="Score breakdown",
                           barmode="stack",
-                          color_discrete_sequence=theme.SERIES[THEME])
-            fig2.update_layout(**plotly_dark(), xaxis_tickangle=-35)
+                          color_discrete_sequence=theme.SERIES[THEME],
+                          labels={"player": "", "value": "", "variable": ""})
+            # px names series after the dataframe columns; the reader should
+            # see "Batting", not "batting_score".
+            fig2.for_each_trace(lambda t: t.update(
+                name=t.name.replace("_score", "").title(),
+                hovertemplate=t.hovertemplate.replace("variable=", "")
+                                             .replace("_score", "")))
+            fig2.update_layout(**plotly_dark(), xaxis_tickangle=-35,
+                               legend_title_text="")
             st.plotly_chart(fig2, use_container_width=True)
     else:
         st.warning("⚠️ Run all scorers first!")
@@ -555,11 +569,11 @@ with tab4:
     if all_players:
         col1, mid, col2 = st.columns([5, 1, 5])
         with col1:
-            p1 = st.selectbox("🔵 Select Player 1", all_players, index=0)
+            p1 = st.selectbox("Player 1", all_players, index=0)
         with mid:
             st.markdown('<div class="vs-badge">VS</div>', unsafe_allow_html=True)
         with col2:
-            p2 = st.selectbox("🔴 Select Player 2", all_players, index=1)
+            p2 = st.selectbox("Player 2", all_players, index=1)
 
         def get_stats(name):
             s  = {"player": name, "team": get_player_team(name) or "Unknown"}
@@ -601,7 +615,7 @@ with tab4:
                 <div style="font-size:0.7rem;letter-spacing:2px;color:var(--faint);
                      text-transform:uppercase">Player 1</div>
                 <div class="h2h-name" style="color:{s1.get("color","var(--accent)")}">
-                    {s1["emoji"]} {p1}</div>
+                    {team_dot(s1)}{p1}</div>
                 <div style="font-size:0.75rem;color:var(--faint);margin-bottom:1rem">
                     {s1.get("team","Unknown")}</div>
                 <div class="h2h-score">
@@ -624,7 +638,7 @@ with tab4:
                 <div style="font-size:0.7rem;letter-spacing:2px;color:var(--faint);
                      text-transform:uppercase">Player 2</div>
                 <div class="h2h-name" style="color:{s2.get("color","var(--negative)")}">
-                    {s2["emoji"]} {p2}</div>
+                    {team_dot(s2)}{p2}</div>
                 <div style="font-size:0.75rem;color:var(--faint);margin-bottom:1rem">
                     {s2.get("team","Unknown")}</div>
                 <div class="h2h-score">
@@ -659,7 +673,7 @@ with tab4:
                 id_vars="Metric", var_name="Player", value_name="Value")
             fig = px.bar(cdf, x="Metric", y="Value",
                          color="Player", barmode="group",
-                         title=f"⚔️  {p1}  vs  {p2}",
+                         title=f"{p1} vs {p2}",
                          color_discrete_map={
                              p1: s1.get("color", theme.SERIES[THEME][0]),
                              p2: s2.get("color", theme.SERIES[THEME][1])})
@@ -811,7 +825,7 @@ with tab6:
                    if p in bat_df["player"].values), None)
         if wk:
             row = bat_df[bat_df["player"] == wk].iloc[0]
-            best_xi.append({"role":"🧤 Wicketkeeper", "player": wk,
+            best_xi.append({"role":"Wicketkeeper", "player": wk,
                 "score": row["batting_score"],
                 "stat": f"Avg {row['average']:.1f}  •  SR {row['strike_rate']:.1f}"})
             added.add(wk)
@@ -820,7 +834,7 @@ with tab6:
         count = 0
         for _, row in bat_df.iterrows():
             if row["player"] not in added and count < 4:
-                best_xi.append({"role": f"🏏 Batsman {count+1}",
+                best_xi.append({"role": f"Batsman {count+1}",
                     "player": row["player"],
                     "score": row["batting_score"],
                     "stat": f"Avg {row['average']:.1f}  •  SR {row['strike_rate']:.1f}"})
@@ -830,7 +844,7 @@ with tab6:
         count = 0
         for _, row in ar_df.iterrows():
             if row["player"] not in added and count < 3:
-                best_xi.append({"role": f"🤸 All-rounder {count+1}",
+                best_xi.append({"role": f"All-rounder {count+1}",
                     "player": row["player"],
                     "score": row["allrounder_score"],
                     "stat": f"Bat {row['batting_score']:.0f}  •  Bowl {row['bowling_score']:.0f}"})
@@ -840,7 +854,7 @@ with tab6:
         count = 0
         for _, row in bowl_df.iterrows():
             if row["player"] not in added and count < 3:
-                best_xi.append({"role": f"🎯 Bowler {count+1}",
+                best_xi.append({"role": f"Bowler {count+1}",
                     "player": row["player"],
                     "score": row["bowling_score"],
                     "stat": f"Econ {row['economy']:.2f}  •  {int(row['wickets'])} wkts"})
@@ -879,6 +893,7 @@ with tab6:
                 hole=0.6,
                 marker_colors=colors,
                 textinfo="label+value",
+                insidetextorientation="horizontal",
                 textfont_color=T["text_muted"]
             ))
             fig.update_layout(
@@ -914,16 +929,16 @@ with tab6:
 with tab7:
     st.markdown('<div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="vertical-align:middle;margin-right:8px"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><line x1="16.5" y1="16.5" x2="22" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Player Search</div>',
                 unsafe_allow_html=True)
-    search = st.text_input("", placeholder="🔍  Search — e.g. Kohli, Bumrah, Narine...",
+    search = st.text_input("", placeholder="Search — e.g. Kohli, Bumrah, Narine...",
                            label_visibility="collapsed")
 
     if search:
         found = False
 
         for dtype, score_col, label, icon in [
-            ("batting",  "batting_score",  "Batting",    "🏏"),
-            ("bowling",  "bowling_score",  "Bowling",    "🎯"),
-            ("allrounder","allrounder_score","All-rounder","🤸"),
+            ("batting",  "batting_score",  "Batting",    ""),
+            ("bowling",  "bowling_score",  "Bowling",    ""),
+            ("allrounder","allrounder_score","All-rounder",""),
         ]:
             if scores[dtype] is not None:
                 df    = scores[dtype].copy()
@@ -939,7 +954,7 @@ with tab7:
                              style="border-top:3px solid {ti["color"]};
                                     max-width:400px;margin-bottom:1rem">
                             <div class="h2h-name" style="color:{ti["color"]}">
-                                {ti["emoji"]} {name}</div>
+                                {team_dot(ti)}{name}</div>
                             <div style="font-size:0.75rem;color:var(--faint)">
                                 {ti["team_name"]}</div>
                             <div class="h2h-score">
@@ -969,11 +984,11 @@ st.markdown("""
 <div style="text-align:center;padding:2rem 0 1rem;
      border-top:1px solid var(--border);margin-top:2rem;
      font-size:0.75rem;color:var(--faint);letter-spacing:1px">
-    🏏 &nbsp; CRICKET ANALYTICS PLATFORM &nbsp; • &nbsp;
+    CRICKET ANALYTICS PLATFORM &nbsp; • &nbsp;
     Data: Cricsheet.org &nbsp; • &nbsp;
     Built with Python · Streamlit · Plotly &nbsp; • &nbsp;
     100% Free & Open Source &nbsp; • &nbsp;
-    🏆 IPL 2026 — RCB Back-to-Back Champions
+    IPL 2026 — RCB back-to-back champions
 </div>
 """, unsafe_allow_html=True)
 # ── TAB 9 — LIVE SCORES (Cricbuzz Style) ──────────────
@@ -1190,7 +1205,7 @@ with tab9:
                         '<span>' + str(bat_prob) + '% ' + score_arr[0].get("inning","").replace(" Inning 1","")[:15] + '</span>'
                         '</div>'
                         '<div style="height:5px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;">'
-                        '<div style="height:100%;width:' + str(bar_w) + '%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;"></div>'
+                        '<div style="height:100%;width:' + str(bar_w) + '%;background:var(--accent-mark);border-radius:3px;"></div>'
                         '</div>'
                         '</div>'
                     )
@@ -1413,17 +1428,17 @@ def hex_to_rgba(hex_color, alpha=0.3):
 # ──────────────────────────────────────────────────────
 with tab8:
     st.markdown('''<div class="section-title">
-        🏟️ Team Intelligence — Opposition Analysis
+        Team Intelligence — Opposition Analysis
     </div>''', unsafe_allow_html=True)
 
     team_list = list(IPL_TEAMS.keys())
     col1, mid, col2 = st.columns([5,1,5])
     with col1:
-        team1 = st.selectbox("🔵 Your Team", team_list, index=0)
+        team1 = st.selectbox("Your team", team_list, index=0)
     with mid:
         st.markdown('<div class="vs-badge">VS</div>', unsafe_allow_html=True)
     with col2:
-        team2 = st.selectbox("🔴 Opponent", team_list, index=1)
+        team2 = st.selectbox("Opponent", team_list, index=1)
 
     if team1 == team2:
         st.warning("⚠️ Please select two different teams!")
@@ -1439,7 +1454,7 @@ with tab8:
                 <div style="font-size:0.7rem;letter-spacing:2px;color:var(--faint);
                      text-transform:uppercase">Your Team</div>
                 <div class="h2h-name" style="color:{ti1["color"]}">
-                    {ti1["emoji"]} {team1}</div>
+                    {team_dot(ti1)}{team1}</div>
                 <div style="font-size:2rem;font-family:'Rajdhani',sans-serif;
                      font-weight:700;color:{ti1["color"]};margin-top:0.5rem">
                     {ti1["short"]}</div>
@@ -1450,7 +1465,7 @@ with tab8:
                 <div style="font-size:0.7rem;letter-spacing:2px;color:var(--faint);
                      text-transform:uppercase">Opponent</div>
                 <div class="h2h-name" style="color:{ti2["color"]}">
-                    {ti2["emoji"]} {team2}</div>
+                    {team_dot(ti2)}{team2}</div>
                 <div style="font-size:2rem;font-family:'Rajdhani',sans-serif;
                      font-weight:700;color:{ti2["color"]};margin-top:0.5rem">
                     {ti2["short"]}</div>
@@ -1475,7 +1490,7 @@ with tab8:
             swot2 = generate_swot(team2, stats2, stats1)
 
             st.markdown(f'<div class="section-title" style="font-size:1.1rem">'
-                        f'{ti1["emoji"]} {team1} — SWOT Analysis</div>',
+                        f'{team_dot(ti1)}{team1} — SWOT Analysis</div>',
                         unsafe_allow_html=True)
 
             sc1,sc2,sc3,sc4 = st.columns(4)
@@ -1506,7 +1521,7 @@ with tab8:
 
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown(f'<div class="section-title" style="font-size:1.1rem">'
-                        f'{ti2["emoji"]} {team2} — SWOT Analysis</div>',
+                        f'{team_dot(ti2)}{team2} — SWOT Analysis</div>',
                         unsafe_allow_html=True)
 
             sc1,sc2,sc3,sc4 = st.columns(4)
@@ -1604,7 +1619,7 @@ with tab8:
             for col_w, tname, tinfo in [(c1,team1,ti1),(c2,team2,ti2)]:
                 with col_w:
                     st.markdown(f'<div class="section-title" style="font-size:1rem">'
-                                f'{tinfo["emoji"]} {tname}</div>',
+                                f'{team_dot(tinfo)}{tname}</div>',
                                 unsafe_allow_html=True)
                     players = get_team_players(tname, scores)
                     if players["batting"]:
@@ -1635,7 +1650,7 @@ with tab8:
             for col_w, tname, tinfo in [(c1,team1,ti1),(c2,team2,ti2)]:
                 with col_w:
                     st.markdown(f'<div class="section-title" style="font-size:1rem">'
-                                f'{tinfo["emoji"]} {tname}</div>',
+                                f'{team_dot(tinfo)}{tname}</div>',
                                 unsafe_allow_html=True)
                     players = get_team_players(tname, scores)
                     if players["bowling"]:
@@ -1669,7 +1684,7 @@ with tab8:
             ]:
                 with col_w:
                     st.markdown(f'<div class="section-title" style="font-size:1rem">'
-                                f'{tinfo["emoji"]} {tname} — Best XI vs {opp_name}</div>',
+                                f'{team_dot(tinfo)}{tname} — Best XI vs {opp_name}</div>',
                                 unsafe_allow_html=True)
                     xi = get_best_xi_vs_opponent(tname, opp_name, scores, min_matches)
                     if xi:
@@ -1693,7 +1708,7 @@ with tab8:
 
         # Player matchups
         with it6:
-            st.markdown(f'<div class="section-title">⚔️ Key Matchups — {team1} Batters vs {team2} Bowlers</div>',
+            st.markdown(f'<div class="section-title">Key Matchups — {team1} Batters vs {team2} Bowlers</div>',
                         unsafe_allow_html=True)
             matchups = get_player_matchups(team1, team2, scores)
 
@@ -1733,7 +1748,7 @@ with tab8:
                     </div>''', unsafe_allow_html=True)
 
                 st.markdown("<br>", unsafe_allow_html=True)
-                st.markdown(f'<div class="section-title">⚔️ {team2} Batters vs {team1} Bowlers</div>',
+                st.markdown(f'<div class="section-title">{team2} Batters vs {team1} Bowlers</div>',
                             unsafe_allow_html=True)
                 reverse = get_player_matchups(team2, team1, scores)
                 for m in reverse:

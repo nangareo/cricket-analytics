@@ -381,8 +381,9 @@ html, body, [data-testid="stAppViewContainer"], .stApp {{
 
 /* The team colour reads as a quiet dot rather than tinted text. */
 .team-dot {{
-  width:7px; height:7px; border-radius:50%; flex-shrink:0; display:inline-block;
-  position:relative;
+  width:7px; height:7px; border-radius:50%; flex-shrink:0;
+  display:inline-block; position:relative;
+  margin-right:7px; vertical-align:middle;
 }}
 /* Hairline across the middle — the ball's seam at 7px. */
 .team-dot::after {{
