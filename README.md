@@ -203,7 +203,7 @@ Everything is free and open source, and the dashboard runs fully offline.
 | pandas · numpy · altair | BSD |
 | plotly · tabulate · pytest · Playwright | MIT |
 | pyarrow | Apache 2.0 |
-| Ball-by-ball data | [Cricsheet](https://cricsheet.org) — free, ODbL |
+| Ball-by-ball data | [Cricsheet](https://cricsheet.org) — free to download; see Cricsheet for its terms |
 | Fonts | System sans. No webfont CDN, so no third-party request |
 | Streamlit telemetry | Off (`gatherUsageStats = false`) — it posted to api.segment.io on every load |
 
