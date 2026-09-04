@@ -21,3 +21,6 @@ node_modules/
 
 # Local tooling artifacts
 .playwright-mcp/
+
+# macOS
+.DS_Store
